@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import Card from './Card'
+import Create from './Create'
 import uid from 'uid'
 export default function App() {
   const [cardData, setCardData] = useState([
@@ -40,6 +41,7 @@ export default function App() {
           key={card._id}
         />
       ))}
+      <Create />
     </React.Fragment>
   )
 }

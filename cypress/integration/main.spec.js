@@ -2,7 +2,6 @@ describe('Foodsaver App', () => {
   beforeEach(() => {
     cy.visit('http://localhost:3000')
   })
-
   describe('/', () => {
     it('has the correct title', () => {
       cy.title().should('include', 'Foodsaver App')

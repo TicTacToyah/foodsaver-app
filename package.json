@@ -9,7 +9,6 @@
     "babel-loader": "8.0.5",
     "babel-plugin-jsx-remove-data-test-id": "2.0.0",
     "babel-plugin-styled-components": "1.10.0",
-    "cypress": "3.1.5",
     "internal-ip-cli": "1.0.0",
     "prop-types": "15.7.2",
     "react": "^16.8.2",
@@ -40,6 +39,7 @@
   ],
   "devDependencies": {
     "docz": "latest",
-    "docz-theme-default": "latest"
+    "docz-theme-default": "latest",
+    "cypress": "3.1.5"
   }
 }
