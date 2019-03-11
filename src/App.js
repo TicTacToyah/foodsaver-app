@@ -1,8 +1,17 @@
-import React, { useState } from 'react'
-import Card from './Card'
+import React, { useState, useEffect } from 'react'
+import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom'
+import CardsPage from './CardsPage'
 import Create from './Create'
 import uid from 'uid'
+import { saveCardsToStorage } from './services'
+import styled from 'styled-components'
 export default function App() {
+  const Nav = styled.nav`
+    display: grid;
+    grid-auto-flow: column;
+    grid-gap: 2px;
+  `
+
   const [cardData, setCardData] = useState([
     {
       category: 'Frucht',
@@ -29,19 +38,29 @@ export default function App() {
       _id: uid(),
     },
   ])
+
+  useEffect(() => {
+    saveCardsToStorage(cardData)
+  }, [cardData])
+
+  function addCard(data) {
+    setCardData([...cardData, { ...data, _id: uid() }])
+  }
+
   return (
-    <React.Fragment>
-      {cardData.map(card => (
-        <Card
-          category={card.category}
-          title={card.title}
-          location={card.location}
-          smell={card.smell}
-          optic={card.optic}
-          key={card._id}
+    <Router>
+      <React.Fragment>
+        <Route
+          exact
+          path="/"
+          render={() => <CardsPage cardData={cardData} />}
         />
-      ))}
-      <Create />
-    </React.Fragment>
+        <Route path="/create" render={() => <Create onSubmit={addCard} />} />
+        <Nav>
+          <NavLink to="/">Home</NavLink>
+          <NavLink to="/create">Create</NavLink>
+        </Nav>
+      </React.Fragment>
+    </Router>
   )
 }
