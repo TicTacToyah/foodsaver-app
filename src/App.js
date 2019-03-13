@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom'
 import CardsPage from './CardsPage'
 import Create from './Create'
 import uid from 'uid'
-import { saveCardsToStorage } from './services'
+import { saveCardsToStorage, getCardsFromStorage } from './services'
 import styled from 'styled-components'
 export default function App() {
   const Nav = styled.nav`
@@ -14,37 +14,33 @@ export default function App() {
 
   const [cardData, setCardData] = useState([
     {
-      category: 'Frucht',
-      title: 'Banane',
-      location: 'St.Pauli',
-      smell: 'Gut',
-      optic: 'Gut',
-      _id: uid(),
-    },
-    {
-      category: 'Frucht',
-      title: 'Erdbeere',
-      location: 'Altona',
+      title: 'axel',
+      location: 'dfdd',
       smell: 'Okay',
-      optic: 'Gut',
-      _id: uid(),
-    },
-    {
-      category: 'Gemüse',
-      title: 'Gurke',
-      location: 'Rahlstedt',
-      smell: 'Sehr gut',
-      optic: 'Gut',
-      _id: uid(),
+      optic: 'Bio-Tonne',
+      category: 'Frucht',
+      comments: [
+        { name: 'toyah', message: 'lol' },
+        { name: 'lutz', message: 'egeh' },
+      ],
     },
   ])
 
+  // useEffect(() => {
+  //   saveCardsToStorage(cardData)
+  // }, [cardData])
+
   useEffect(() => {
-    saveCardsToStorage(cardData)
-  }, [cardData])
+    setCardData([...cardData, ...getCardsFromStorage()])
+  }, [])
 
   function addCard(data) {
     setCardData([...cardData, { ...data, _id: uid() }])
+    saveCardsToStorage([...getCardsFromStorage(), { ...data, _id: uid() }])
+  }
+
+  function addComment(commentData) {
+    setCardData([...cardData, { ...commentData }])
   }
 
   return (
@@ -53,7 +49,9 @@ export default function App() {
         <Route
           exact
           path="/"
-          render={() => <CardsPage cardData={cardData} />}
+          render={() => (
+            <CardsPage cardData={cardData} addComment={addComment} />
+          )}
         />
         <Route path="/create" render={() => <Create onSubmit={addCard} />} />
         <Nav>

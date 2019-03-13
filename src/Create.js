@@ -23,11 +23,6 @@ const StyledInput = styled.input`
   border: solid grey 1px;
 `
 
-const StyledTextarea = styled.textarea`
-  width: 100%;
-  border: solid grey 1px;
-`
-
 const StyledButton = styled.button`
   margin: 5px auto 0;
   height: 40px;

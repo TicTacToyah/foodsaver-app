@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import CommentSection from './CreateComment'
 
 const CardBody = styled.section`
   background: #f2f2f2;
@@ -77,6 +78,7 @@ export default function Card({ category, title, location, smell, optic }) {
           <CardListItem>{optic}</CardListItem>
         </CardList>
       </CardInformation>
+      <CommentSection />
     </CardBody>
   )
 }

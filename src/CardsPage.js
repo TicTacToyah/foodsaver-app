@@ -12,6 +12,7 @@ export default function CardsPage({ cardData }) {
           smell={card.smell}
           optic={card.optic}
           key={card._id}
+          comment={card.comment}
         />
       ))}
     </div>
