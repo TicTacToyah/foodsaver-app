@@ -54,10 +54,10 @@ export function upload(event) {
         'Content-type': 'multipart/form-data',
       },
     })
-    .then(onImageSave)
+    .then()
     .catch(err => console.error(err))
 }
 
-export function onImageSave(response) {
-  setImage(response.data.url)
-}
+// export function onImageSave(response) {
+//   setImage(response.data.url)
+// }
