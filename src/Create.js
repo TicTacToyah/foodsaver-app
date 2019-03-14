@@ -94,7 +94,7 @@ export default function Create({ onSubmit, upload }) {
           onChange={onInputChange}
           data-cy="input-one"
         />
-        <StyledText>Wie riecht &apos s?</StyledText>
+        <StyledText>Wie riecht&apos;s?</StyledText>
         <StyledSelect
           type="text"
           name="smell"
@@ -107,7 +107,7 @@ export default function Create({ onSubmit, upload }) {
           <option value="Okay">Okay</option>
           <option value="Schlecht">Ab auf den Komposthaufen</option>
         </StyledSelect>
-        <StyledText>Wie sieht &apos s aus?</StyledText>
+        <StyledText>Wie sieht&apos;s aus?</StyledText>
         <StyledSelect
           type="text"
           name="optic"
