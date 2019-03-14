@@ -1,12 +1,17 @@
 import React from 'react'
-import Comment from './CreateComment'
+import CreateComment from './CreateComment'
 
-export default function CommentSection({ commentData }) {
+export default function CommentSection({ card, comments, addComment }) {
   return (
     <div>
-      {commentData.map(comments => (
-        <Comment name={comments.name} content={comments.content} />
-      ))}
+      {comments &&
+        comments.map(comment => (
+          <div>
+            <h6>{comment.name}</h6>
+            <p>{comment.message}</p>
+          </div>
+        ))}
+      <CreateComment card={card} addComment={addComment} />
     </div>
   )
 }

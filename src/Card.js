@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import CommentSection from './CreateComment'
+import CommentSection from './CommentSection'
 
 const CardBody = styled.section`
   background: #f2f2f2;
@@ -63,12 +63,15 @@ const EyeIcon = styled.img`
 `
 
 export default function Card({
+  card,
+  image,
   category,
   title,
   location,
   smell,
   optic,
-  image,
+  comments,
+  addComment,
 }) {
   return (
     <CardBody>
@@ -85,7 +88,7 @@ export default function Card({
           <CardListItem>{optic}</CardListItem>
         </CardList>
       </CardInformation>
-      <CommentSection />
+      <CommentSection comments={comments} addComment={addComment} card={card} />
     </CardBody>
   )
 }

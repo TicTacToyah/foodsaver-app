@@ -35,12 +35,24 @@ export default function App() {
   }, [])
 
   function addCard(data) {
-    setCardData([...cardData, { ...data, _id: uid() }])
+    setCardData([...cardData, { ...data, _id: uid(), comments: [] }])
     saveCardsToStorage([...getCardsFromStorage(), { ...data, _id: uid() }])
   }
 
-  function addComment(commentData) {
-    setCardData([...cardData, { ...commentData }])
+  function addComment(commentData, card) {
+    const index = cardData.findIndex(item => item === card)
+
+    setCardData([
+      ...cardData.slice(0, index),
+      {
+        ...cardData[index],
+        ...cardData[index].comments.push({
+          name: commentData.name,
+          message: commentData.message,
+        }),
+      },
+      ...cardData.slice(index + 1),
+    ])
   }
 
   return (

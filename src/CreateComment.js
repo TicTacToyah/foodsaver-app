@@ -1,14 +1,15 @@
 import React, { useState } from 'react'
 
-export default function Comment() {
+export default function Comment({ addComment, card }) {
   const defaultComment = {
     name: '',
     comment: '',
   }
-
   function submitHandler(event) {
     event.preventDefault()
-    //addCard(commentData)
+    console.log(addComment)
+
+    addComment(commentData, card)
     setCommentData(defaultComment)
   }
 
@@ -19,13 +20,18 @@ export default function Comment() {
   const [commentData, setCommentData] = useState(defaultComment)
   return (
     <form action="" onSubmit={submitHandler}>
-      <input type="text" name="name" />
+      <input
+        onChange={onInputChange}
+        type="text"
+        name="name"
+        value={commentData.name}
+      />
       <textarea
-        name="comment"
+        name="message"
         cols="30"
         rows="10"
         placeholder="Add your Comment"
-        value={commentData.comment}
+        value={commentData.message}
         type="text"
         onChange={onInputChange}
       />

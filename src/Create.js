@@ -55,7 +55,6 @@ export default function Create({ onSubmit, upload }) {
       ...data,
       [event.target.name]: event.target.value,
     })
-    console.log(data)
   }
 
   async function fileHandler(event) {
