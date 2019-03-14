@@ -4,6 +4,14 @@ export default function Create() {
   return (
     <div>
       <form>
+        <div>
+          {image ? (
+            <img src={image} alt="" style={{ width: '100%' }} />
+          ) : (
+            <input type="file" name="file" onChange={upload} />
+          )}
+        </div>
+
         <select type="text">
           <option value="Sehr gut">Gemüse</option>
           <option value="Gut">Obst</option>

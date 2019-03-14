@@ -2,6 +2,9 @@ import axios from 'axios'
 const ip = process.env.REACT_APP_BACKEND_IP
 const cardsPath = `http://${ip}:4000/cards`
 
+const CLOUDNAME = process.env.REACT_APP_CLOUDINARY_CLOUDNAME
+const PRESET = process.env.REACT_APP_CLOUDINARY_PRESET
+
 export function getAllCards() {
   return axios.get(cardsPath)
 }
@@ -36,4 +39,25 @@ export function getFromStorage(name) {
   } catch (error) {
     console.error(error.message)
   }
+}
+
+export function upload(event) {
+  const url = `https://api.cloudinary.com/v1_1/${CLOUDNAME}/upload`
+
+  const formData = new FormData()
+  formData.append('file', event.target.files[0])
+  formData.append('upload_preset', PRESET)
+
+  axios
+    .post(url, formData, {
+      headers: {
+        'Content-type': 'multipart/form-data',
+      },
+    })
+    .then(onImageSave)
+    .catch(err => console.error(err))
+}
+
+export function onImageSave(response) {
+  setImage(response.data.url)
 }
