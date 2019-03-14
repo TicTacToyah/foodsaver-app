@@ -1,48 +1,69 @@
-import React, { useState } from 'react'
-import Card from './Card'
+import React, { useState, useEffect } from 'react'
+import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom'
+import CardsPage from './CardsPage'
 import Create from './Create'
 import uid from 'uid'
-import { upload, onImageSave } from './services'
+import {
+  saveCardsToStorage,
+  getCardsFromStorage,
+  upload,
+  onImageSave,
+} from './services'
+import styled from 'styled-components'
 export default function App() {
+  const Nav = styled.nav`
+    display: grid;
+    grid-auto-flow: column;
+    grid-gap: 2px;
+  `
+
   const [cardData, setCardData] = useState([
     {
-      category: 'Frucht',
-      title: 'Banane',
-      location: 'St.Pauli',
-      smell: 'Gut',
-      optic: 'Gut',
-      _id: uid(),
-    },
-    {
-      category: 'Frucht',
-      title: 'Erdbeere',
-      location: 'Altona',
+      title: 'axel',
+      location: 'dfdd',
       smell: 'Okay',
-      optic: 'Gut',
-      _id: uid(),
-    },
-    {
-      category: 'Gemüse',
-      title: 'Gurke',
-      location: 'Rahlstedt',
-      smell: 'Sehr gut',
-      optic: 'Gut',
-      _id: uid(),
+      optic: 'Bio-Tonne',
+      category: 'Frucht',
+      comments: [
+        { name: 'toyah', message: 'lol' },
+        { name: 'lutz', message: 'egeh' },
+      ],
     },
   ])
+
+  // useEffect(() => {
+  //   saveCardsToStorage(cardData)
+  // }, [cardData])
+
+  useEffect(() => {
+    setCardData([...cardData, ...getCardsFromStorage()])
+  }, [])
+
+  function addCard(data) {
+    setCardData([...cardData, { ...data, _id: uid() }])
+    saveCardsToStorage([...getCardsFromStorage(), { ...data, _id: uid() }])
+  }
+
+  function addComment(commentData) {
+    setCardData([...cardData, { ...commentData }])
+  }
+
   return (
-    <React.Fragment>
-      {cardData.map(card => (
-        <Card
-          category={card.category}
-          title={card.title}
-          location={card.location}
-          smell={card.smell}
-          optic={card.optic}
-          key={card._id}
+    <Router>
+      <React.Fragment>
+        <Route
+          exact
+          path="/"
+          render={() => (
+            <CardsPage cardData={cardData} addComment={addComment} />
+          )}
         />
-      ))}
-      <Create />
-    </React.Fragment>
+        <Route path="/create" render={() => <Create onSubmit={addCard} />} />
+        <Nav>
+          <NavLink to="/">Home</NavLink>
+          <NavLink to="/create">Create</NavLink>
+        </Nav>
+      </React.Fragment>
+    </Router>
   )
 }
