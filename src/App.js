@@ -58,7 +58,10 @@ export default function App() {
             <CardsPage cardData={cardData} addComment={addComment} />
           )}
         />
-        <Route path="/create" render={() => <Create onSubmit={addCard} />} />
+        <Route
+          path="/create"
+          render={() => <Create onSubmit={addCard} upload={upload} />}
+        />
         <Nav>
           <NavLink to="/">Home</NavLink>
           <NavLink to="/create">Create</NavLink>

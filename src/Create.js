@@ -33,8 +33,9 @@ const StyledButton = styled.button`
   font-size: 1rem;
 `
 
-export default function Create({ onSubmit }) {
+export default function Create({ onSubmit, upload }) {
   const defaultData = {
+    image: '',
     title: '',
     location: '',
     smell: '',
@@ -57,31 +58,15 @@ export default function Create({ onSubmit }) {
   }
 
   return (
-<<<<<<< HEAD
-    <div>
-      <form>
+    <StyledSection>
+      <form onSubmit={onSubmitHandler}>
         <div>
-          {image ? (
-            <img src={image} alt="" style={{ width: '100%' }} />
+          {data.image ? (
+            <img src={data.image} alt="" style={{ width: '100%' }} />
           ) : (
             <input type="file" name="file" onChange={upload} />
           )}
         </div>
-
-        <select type="text">
-          <option value="Sehr gut">Gemüse</option>
-          <option value="Gut">Obst</option>
-          <option value="Okay">Aufschnitt</option>
-          <option value="Schlecht">Trockenes</option>
-        </select>
-        <input type="text" />
-        <textarea name="" id="" cols="30" rows="10" />
-        <select type="text">
-          <option value="Sehr gut">Einfach lecker!</option>
-          <option value="Gut">Gut.</option>
-=======
-    <StyledSection>
-      <form onSubmit={onSubmitHandler}>
         <StyledText>Wähle eine Kategorie aus:</StyledText>
         <StyledSelect
           type="text"
@@ -113,7 +98,6 @@ export default function Create({ onSubmit }) {
         >
           <option value="Einfach lecker!">Einfach lecker!</option>
           <option value="Gut">Gut</option>
->>>>>>> master
           <option value="Okay">Okay</option>
           <option value="Schlecht">Ab auf den Komposthaufen</option>
         </StyledSelect>
