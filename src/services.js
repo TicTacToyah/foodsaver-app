@@ -41,21 +41,19 @@ export function getFromStorage(name) {
   }
 }
 
-export function upload(event) {
+export function imageUpload(event) {
+  console.log(event)
   const url = `https://api.cloudinary.com/v1_1/${CLOUDNAME}/upload`
 
   const formData = new FormData()
   formData.append('file', event.target.files[0])
   formData.append('upload_preset', PRESET)
 
-  axios
-    .post(url, formData, {
-      headers: {
-        'Content-type': 'multipart/form-data',
-      },
-    })
-    .then()
-    .catch(err => console.error(err))
+  return axios.post(url, formData, {
+    headers: {
+      'Content-type': 'multipart/form-data',
+    },
+  })
 }
 
 // export function onImageSave(response) {

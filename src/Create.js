@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
+import { imageUpload } from './services'
 
 const StyledSection = styled.section`
   display: flex;
@@ -57,6 +58,12 @@ export default function Create({ onSubmit, upload }) {
     console.log(data)
   }
 
+  async function fileHandler(event) {
+    await imageUpload(event).then(response =>
+      setData({ ...data, imageURL: response.data.url })
+    )
+  }
+
   return (
     <StyledSection>
       <form onSubmit={onSubmitHandler}>
@@ -64,7 +71,7 @@ export default function Create({ onSubmit, upload }) {
           {data.image ? (
             <img src={data.image} alt="" style={{ width: '100%' }} />
           ) : (
-            <input type="file" name="file" onChange={upload} />
+            <input type="file" name="file" onChange={fileHandler} />
           )}
         </div>
         <StyledText>Wähle eine Kategorie aus:</StyledText>
@@ -123,6 +130,7 @@ export default function Create({ onSubmit, upload }) {
         />
         <StyledButton>Save me</StyledButton>
       </form>
+      <StyledButton onClick={() => console.log(data)} />
     </StyledSection>
   )
 }

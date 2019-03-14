@@ -7,6 +7,7 @@ export default function CardsPage({ cardData }) {
       {cardData.map(card => (
         <Card
           category={card.category}
+          image={card.imageURL}
           title={card.title}
           location={card.location}
           smell={card.smell}

@@ -62,10 +62,17 @@ const EyeIcon = styled.img`
   width: 16px;
 `
 
-export default function Card({ category, title, location, smell, optic }) {
+export default function Card({
+  category,
+  title,
+  location,
+  smell,
+  optic,
+  image,
+}) {
   return (
     <CardBody>
-      <CardImage src={require('./images/Braune_Bananen_verwerten.jpg')} />
+      <CardImage src={image} />
       <CardInformation>
         <CardCategory>{category}</CardCategory>
         <CardHeadline>{title}</CardHeadline>
