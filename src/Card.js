@@ -64,6 +64,7 @@ const EyeIcon = styled.img`
 
 export default function Card({
   card,
+  image,
   category,
   title,
   location,
@@ -74,7 +75,7 @@ export default function Card({
 }) {
   return (
     <CardBody>
-      <CardImage src={require('./images/Braune_Bananen_verwerten.jpg')} />
+      <CardImage src={image} />
       <CardInformation>
         <CardCategory>{category}</CardCategory>
         <CardHeadline>{title}</CardHeadline>
