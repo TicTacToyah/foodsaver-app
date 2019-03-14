@@ -42,7 +42,6 @@ export function getFromStorage(name) {
 }
 
 export function imageUpload(event) {
-  console.log(event)
   const url = `https://api.cloudinary.com/v1_1/${CLOUDNAME}/upload`
 
   const formData = new FormData()
@@ -55,7 +54,3 @@ export function imageUpload(event) {
     },
   })
 }
-
-// export function onImageSave(response) {
-//   setImage(response.data.url)
-// }

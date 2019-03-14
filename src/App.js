@@ -3,12 +3,7 @@ import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom'
 import CardsPage from './CardsPage'
 import Create from './Create'
 import uid from 'uid'
-import {
-  saveCardsToStorage,
-  getCardsFromStorage,
-  upload,
-  onImageSave,
-} from './services'
+import { saveCardsToStorage, getCardsFromStorage } from './services'
 import styled from 'styled-components'
 export default function App() {
   const Nav = styled.nav`
