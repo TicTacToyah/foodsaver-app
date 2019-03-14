@@ -53,7 +53,6 @@ export default function Create({ onSubmit }) {
       ...data,
       [event.target.name]: event.target.value,
     })
-    console.log(data)
   }
 
   return (

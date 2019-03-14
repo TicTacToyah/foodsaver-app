@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import CommentSection from './CreateComment'
+import CommentSection from './CommentSection'
 
 const CardBody = styled.section`
   background: #f2f2f2;
@@ -62,7 +62,16 @@ const EyeIcon = styled.img`
   width: 16px;
 `
 
-export default function Card({ category, title, location, smell, optic }) {
+export default function Card({
+  card,
+  category,
+  title,
+  location,
+  smell,
+  optic,
+  comments,
+  addComment,
+}) {
   return (
     <CardBody>
       <CardImage src={require('./images/Braune_Bananen_verwerten.jpg')} />
@@ -78,7 +87,7 @@ export default function Card({ category, title, location, smell, optic }) {
           <CardListItem>{optic}</CardListItem>
         </CardList>
       </CardInformation>
-      <CommentSection />
+      <CommentSection comments={comments} addComment={addComment} card={card} />
     </CardBody>
   )
 }
