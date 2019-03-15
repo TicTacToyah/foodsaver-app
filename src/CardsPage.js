@@ -1,7 +1,7 @@
 import React from 'react'
 import Card from './Card'
 
-export default function CardsPage({ cardData, addComment }) {
+export default function CardsPage({ cardData, addComment, deleteCard }) {
   return (
     <div>
       {cardData.map(card => (
@@ -16,6 +16,7 @@ export default function CardsPage({ cardData, addComment }) {
           key={card._id}
           comments={card.comments}
           addComment={addComment}
+          deleteCard={deleteCard}
         />
       ))}
     </div>

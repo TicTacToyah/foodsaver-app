@@ -18,6 +18,7 @@ export default function Comment({ addComment, card }) {
   }
 
   const [commentData, setCommentData] = useState(defaultComment)
+
   return (
     <form action="" onSubmit={submitHandler}>
       <input

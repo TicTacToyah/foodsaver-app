@@ -55,6 +55,12 @@ export default function App() {
     ])
   }
 
+  function deleteCard(cardData, card) {
+    const index = cardData.findIndex(item => item === card)
+
+    setCardData([...cardData.slice(0, index), ...cardData.slice(index + 1)])
+  }
+
   return (
     <Router>
       <React.Fragment>
@@ -62,7 +68,11 @@ export default function App() {
           exact
           path="/"
           render={() => (
-            <CardsPage cardData={cardData} addComment={addComment} />
+            <CardsPage
+              cardData={cardData}
+              addComment={addComment}
+              deleteCard={deleteCard}
+            />
           )}
         />
         <Route path="/create" render={() => <Create onSubmit={addCard} />} />
