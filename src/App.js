@@ -6,22 +6,41 @@ import uid from 'uid'
 import { saveCardsToStorage, getCardsFromStorage } from './services'
 import styled from 'styled-components'
 export default function App() {
-  const Nav = styled.nav`
+  const Grid = styled.div`
+    display: grid;
+    grid-template-rows: auto 48px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  `
+
+  const StyledNav = styled.nav`
     display: grid;
     grid-auto-flow: column;
     grid-gap: 2px;
+    font-family: Helvetica, sans-serif;
+    background-color: grey;
+    font-style: grey;
+    text-decoration: none;
+    overflow: hidden;
   `
-
+  const StyledNavLink = styled(NavLink)`
+    font-family: Helvetica, sans-serif;
+    text-decoration: none;
+  `
   const [cardData, setCardData] = useState([
     {
       title: 'axel',
+      _id: 'gfhdjdfhjd',
       location: 'dfdd',
       smell: 'Okay',
       optic: 'Bio-Tonne',
       category: 'Frucht',
       comments: [
         { name: 'toyah', message: 'lol' },
-        { name: 'lutz', message: 'egeh' },
+        { name: 'Toto', message: 'egeh' },
       ],
     },
   ])
@@ -49,13 +68,14 @@ export default function App() {
         ...cardData[index].comments.push({
           name: commentData.name,
           message: commentData.message,
+          _id: uid(),
         }),
       },
       ...cardData.slice(index + 1),
     ])
   }
 
-  function deleteCard(cardData, card) {
+  function deleteCard(card) {
     const index = cardData.findIndex(item => item === card)
 
     setCardData([...cardData.slice(0, index), ...cardData.slice(index + 1)])
@@ -63,7 +83,7 @@ export default function App() {
 
   return (
     <Router>
-      <React.Fragment>
+      <Grid>
         <Route
           exact
           path="/"
@@ -76,11 +96,11 @@ export default function App() {
           )}
         />
         <Route path="/create" render={() => <Create onSubmit={addCard} />} />
-        <Nav>
-          <NavLink to="/">Home</NavLink>
-          <NavLink to="/create">Create</NavLink>
-        </Nav>
-      </React.Fragment>
+        <StyledNav>
+          <StyledNavLink to="/">Home</StyledNavLink>
+          <StyledNavLink to="/create">Create</StyledNavLink>
+        </StyledNav>
+      </Grid>
     </Router>
   )
 }

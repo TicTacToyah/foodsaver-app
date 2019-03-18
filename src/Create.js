@@ -41,6 +41,7 @@ export default function Create({ onSubmit, upload }) {
     location: '',
     smell: '',
     optic: '',
+    comments: [],
   }
 
   function onSubmitHandler(event) {
@@ -81,6 +82,7 @@ export default function Create({ onSubmit, upload }) {
           name="category"
           data-cy="select-one"
         >
+          <option>Wähle eine Option aus</option>
           <option value="Gemüse">Gemüse</option>
           <option value="Frucht">Obst</option>
           <option value="Aufschnitt">Aufschnitt</option>
@@ -102,6 +104,7 @@ export default function Create({ onSubmit, upload }) {
           onChange={onInputChange}
           data-cy="select-two"
         >
+          <option>Wähle eine Option aus</option>
           <option value="Einfach lecker!">Einfach lecker!</option>
           <option value="Gut">Gut</option>
           <option value="Okay">Okay</option>
@@ -115,6 +118,7 @@ export default function Create({ onSubmit, upload }) {
           onChange={onInputChange}
           data-cy="select-three"
         >
+          <option>Wähle eine Option aus</option>
           <option value="Top">Top</option>
           <option value="Noch ganz gut">Noch ganz gut</option>
           <option value="Bio-Tonne">Bio-Tonne</option>

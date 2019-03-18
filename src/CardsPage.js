@@ -16,7 +16,7 @@ export default function CardsPage({ cardData, addComment, deleteCard }) {
           key={card._id}
           comments={card.comments}
           addComment={addComment}
-          deleteCard={deleteCard}
+          deleteCard={() => deleteCard(card)}
         />
       ))}
     </div>

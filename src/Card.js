@@ -3,9 +3,10 @@ import styled from 'styled-components'
 import CommentSection from './CommentSection'
 
 const CardBody = styled.section`
-  background: #f2f2f2;
+  background: #ffffff;
   box-shadow: 0px 15px 18px rgba(201, 201, 201, 0.5);
   margin: 15px 0;
+  padding: 5px;
 `
 
 const CardImage = styled.img`
@@ -72,9 +73,11 @@ export default function Card({
   optic,
   comments,
   addComment,
+  deleteCard,
 }) {
   return (
     <CardBody>
+      <button onClick={deleteCard}>X</button>
       <CardImage src={image} />
       <CardInformation>
         <CardCategory>{category}</CardCategory>
