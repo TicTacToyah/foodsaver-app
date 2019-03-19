@@ -4,10 +4,7 @@ import CardsPage from './CardsPage'
 import Create from './Create'
 import uid from 'uid'
 import { saveCardsToStorage, getCardsFromStorage } from './services'
-<<<<<<< HEAD
 import GlobalStyles from './GlobalStyles'
-=======
->>>>>>> master
 import styled from 'styled-components'
 export default function App() {
   const Grid = styled.div`
