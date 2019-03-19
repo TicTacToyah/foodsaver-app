@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
+import { imageUpload } from './services'
 
 const StyledSection = styled.section`
   display: flex;
@@ -23,11 +24,6 @@ const StyledInput = styled.input`
   border: solid grey 1px;
 `
 
-const StyledTextarea = styled.textarea`
-  width: 100%;
-  border: solid grey 1px;
-`
-
 const StyledButton = styled.button`
   margin: 5px auto 0;
   height: 40px;
@@ -38,8 +34,9 @@ const StyledButton = styled.button`
   font-size: 1rem;
 `
 
-export default function Create({ onSubmit }) {
+export default function Create({ onSubmit, upload }) {
   const defaultData = {
+    image: '',
     title: '',
     location: '',
     smell: '',
@@ -58,12 +55,24 @@ export default function Create({ onSubmit }) {
       ...data,
       [event.target.name]: event.target.value,
     })
-    console.log(data)
+  }
+
+  async function fileHandler(event) {
+    await imageUpload(event).then(response =>
+      setData({ ...data, imageURL: response.data.url })
+    )
   }
 
   return (
     <StyledSection>
       <form onSubmit={onSubmitHandler}>
+        <div>
+          {data.image ? (
+            <img src={data.image} alt="" style={{ width: '100%' }} />
+          ) : (
+            <input type="file" name="file" onChange={fileHandler} />
+          )}
+        </div>
         <StyledText>Wähle eine Kategorie aus:</StyledText>
         <StyledSelect
           type="text"
@@ -85,7 +94,7 @@ export default function Create({ onSubmit }) {
           onChange={onInputChange}
           data-cy="input-one"
         />
-        <StyledText>Wie riechts?</StyledText>
+        <StyledText>Wie riecht&apos;s?</StyledText>
         <StyledSelect
           type="text"
           name="smell"
@@ -98,7 +107,7 @@ export default function Create({ onSubmit }) {
           <option value="Okay">Okay</option>
           <option value="Schlecht">Ab auf den Komposthaufen</option>
         </StyledSelect>
-        <StyledText>Wie sieht's aus?</StyledText>
+        <StyledText>Wie sieht&apos;s aus?</StyledText>
         <StyledSelect
           type="text"
           name="optic"
@@ -120,6 +129,7 @@ export default function Create({ onSubmit }) {
         />
         <StyledButton>Save me</StyledButton>
       </form>
+      <StyledButton onClick={() => console.log(data)} />
     </StyledSection>
   )
 }

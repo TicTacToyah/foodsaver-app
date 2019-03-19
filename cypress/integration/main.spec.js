@@ -20,7 +20,7 @@ describe('Foodsaver App', () => {
     })
   })
 
-  describe('form', () => {
+  describe('/create', () => {
     it('has a form with input fields', () => {
       cy.get('[data-cy="input-one"]')
         .should('have.length', 1)

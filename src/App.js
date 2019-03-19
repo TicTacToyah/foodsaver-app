@@ -4,7 +4,10 @@ import CardsPage from './CardsPage'
 import Create from './Create'
 import uid from 'uid'
 import { saveCardsToStorage, getCardsFromStorage } from './services'
+<<<<<<< HEAD
 import GlobalStyles from './GlobalStyles'
+=======
+>>>>>>> master
 import styled from 'styled-components'
 export default function App() {
   const Grid = styled.div`
@@ -68,14 +71,13 @@ export default function App() {
         ...cardData[index].comments.push({
           name: commentData.name,
           message: commentData.message,
-          _id: uid(),
         }),
       },
       ...cardData.slice(index + 1),
     ])
   }
 
-  function deleteCard(card) {
+  function deleteCard(cardData, card) {
     const index = cardData.findIndex(item => item === card)
 
     setCardData([...cardData.slice(0, index), ...cardData.slice(index + 1)])
