@@ -7,7 +7,7 @@ export default function CommentSection({ card, comments, addComment }) {
       {comments &&
         comments.map(comment => (
           <div>
-            <h6>{comment.name}</h6>
+            <h3>{comment.name}</h3>
             <p>{comment.message}</p>
           </div>
         ))}
