@@ -25,6 +25,7 @@ export default function App() {
     background-color: grey;
     font-style: grey;
     text-decoration: none;
+    overflow: hidden;
   `
   const StyledNavLink = styled(NavLink)`
     font-family: Helvetica, sans-serif;
@@ -68,13 +69,14 @@ export default function App() {
         ...cardData[index].comments.push({
           name: commentData.name,
           message: commentData.message,
+          _id: uid(),
         }),
       },
       ...cardData.slice(index + 1),
     ])
   }
 
-  function deleteCard(cardData, card) {
+  function deleteCard(card) {
     const index = cardData.findIndex(item => item === card)
 
     setCardData([...cardData.slice(0, index), ...cardData.slice(index + 1)])

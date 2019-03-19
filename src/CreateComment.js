@@ -1,14 +1,18 @@
 import React, { useState } from 'react'
+import styled from 'styled-components'
 
+const StyledForm = styled.form`
+  margin-bottom: 5px;
+  border: #ff6347 1px solid;
+`
 export default function Comment({ addComment, card }) {
   const defaultComment = {
     name: '',
-    comment: '',
+    message: '',
   }
   function submitHandler(event) {
     event.preventDefault()
     console.log(addComment)
-
     addComment(commentData, card)
     setCommentData(defaultComment)
   }
@@ -20,23 +24,24 @@ export default function Comment({ addComment, card }) {
   const [commentData, setCommentData] = useState(defaultComment)
 
   return (
-    <form action="" onSubmit={submitHandler}>
+    <StyledForm onSubmit={submitHandler}>
       <input
         onChange={onInputChange}
         type="text"
         name="name"
         value={commentData.name}
+        placeholder="Dein Name"
       />
       <textarea
         name="message"
         cols="30"
-        rows="10"
-        placeholder="Add your Comment"
+        rows="5"
+        placeholder="Schreibe einen Kommentar"
         value={commentData.message}
         type="text"
         onChange={onInputChange}
       />
       <button>Send Comment</button>
-    </form>
+    </StyledForm>
   )
 }
