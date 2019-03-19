@@ -3,64 +3,104 @@ import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom'
 import CardsPage from './CardsPage'
 import Create from './Create'
 import uid from 'uid'
-import { saveCardsToStorage } from './services'
+import { saveCardsToStorage, getCardsFromStorage } from './services'
+import GlobalStyles from './GlobalStyles'
 import styled from 'styled-components'
 export default function App() {
-  const Nav = styled.nav`
+  const Grid = styled.div`
+    display: grid;
+    grid-template-rows: auto 48px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  `
+
+  const StyledNav = styled.nav`
     display: grid;
     grid-auto-flow: column;
     grid-gap: 2px;
+    font-family: Helvetica, sans-serif;
+    background-color: grey;
+    font-style: grey;
+    text-decoration: none;
   `
-
+  const StyledNavLink = styled(NavLink)`
+    font-family: Helvetica, sans-serif;
+    text-decoration: none;
+  `
   const [cardData, setCardData] = useState([
     {
-      category: 'Frucht',
-      title: 'Banane',
-      location: 'St.Pauli',
-      smell: 'Gut',
-      optic: 'Gut',
-      _id: uid(),
-    },
-    {
-      category: 'Frucht',
-      title: 'Erdbeere',
-      location: 'Altona',
+      title: 'axel',
+      _id: 'gfhdjdfhjd',
+      location: 'dfdd',
       smell: 'Okay',
-      optic: 'Gut',
-      _id: uid(),
-    },
-    {
-      category: 'Gemüse',
-      title: 'Gurke',
-      location: 'Rahlstedt',
-      smell: 'Sehr gut',
-      optic: 'Gut',
-      _id: uid(),
+      optic: 'Bio-Tonne',
+      category: 'Frucht',
+      comments: [
+        { name: 'toyah', message: 'lol' },
+        { name: 'Toto', message: 'egeh' },
+      ],
     },
   ])
 
+  // useEffect(() => {
+  //   saveCardsToStorage(cardData)
+  // }, [cardData])
+
   useEffect(() => {
-    saveCardsToStorage(cardData)
-  }, [cardData])
+    setCardData([...cardData, ...getCardsFromStorage()])
+  }, [])
 
   function addCard(data) {
-    setCardData([...cardData, { ...data, _id: uid() }])
+    setCardData([...cardData, { ...data, _id: uid(), comments: [] }])
+    saveCardsToStorage([...getCardsFromStorage(), { ...data, _id: uid() }])
+  }
+
+  function addComment(commentData, card) {
+    const index = cardData.findIndex(item => item === card)
+
+    setCardData([
+      ...cardData.slice(0, index),
+      {
+        ...cardData[index],
+        ...cardData[index].comments.push({
+          name: commentData.name,
+          message: commentData.message,
+          _id: uid(),
+        }),
+      },
+      ...cardData.slice(index + 1),
+    ])
+  }
+
+  function deleteCard(card) {
+    const index = cardData.findIndex(item => item === card)
+
+    setCardData([...cardData.slice(0, index), ...cardData.slice(index + 1)])
   }
 
   return (
     <Router>
-      <React.Fragment>
+      <Grid>
         <Route
           exact
           path="/"
-          render={() => <CardsPage cardData={cardData} />}
+          render={() => (
+            <CardsPage
+              cardData={cardData}
+              addComment={addComment}
+              deleteCard={deleteCard}
+            />
+          )}
         />
         <Route path="/create" render={() => <Create onSubmit={addCard} />} />
-        <Nav>
-          <NavLink to="/">Home</NavLink>
-          <NavLink to="/create">Create</NavLink>
-        </Nav>
-      </React.Fragment>
+        <StyledNav>
+          <StyledNavLink to="/">Home</StyledNavLink>
+          <StyledNavLink to="/create">Create</StyledNavLink>
+        </StyledNav>
+      </Grid>
     </Router>
   )
 }
