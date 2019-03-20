@@ -1,6 +1,10 @@
 import { createGlobalStyle } from 'styled-components'
 
 export default createGlobalStyle`
+  * {
+    box-sizing: border-box;
+  }
+
 
 body {
     font-family: sans-serif;
@@ -12,6 +16,8 @@ body {
     width: 100%;
     height: 100%;
     overflow: hidden;
+    margin: 0;
+    padding: 0;
   }
 
   input, textarea {

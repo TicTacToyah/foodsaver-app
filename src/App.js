@@ -9,10 +9,9 @@ import styled from 'styled-components'
 export default function App() {
   const Grid = styled.div`
     display: grid;
-    grid-template-rows: auto 48px;
+    grid-template-rows: 48px auto 48px;
     position: absolute;
     top: 0;
-    left: 0;
     width: 100%;
     height: 100%;
   `
@@ -20,16 +19,20 @@ export default function App() {
   const StyledNav = styled.nav`
     display: grid;
     grid-auto-flow: column;
-    grid-gap: 2px;
     font-family: Helvetica, sans-serif;
     background-color: grey;
-    font-style: grey;
-    text-decoration: none;
-    overflow: hidden;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
   `
   const StyledNavLink = styled(NavLink)`
+    height: 48px;
+    grid-auto-flow: column;
     font-family: Helvetica, sans-serif;
     text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   `
   const [cardData, setCardData] = useState([
     {
@@ -84,24 +87,26 @@ export default function App() {
 
   return (
     <Router>
-      <Grid>
-        <Route
-          exact
-          path="/"
-          render={() => (
-            <CardsPage
-              cardData={cardData}
-              addComment={addComment}
-              deleteCard={deleteCard}
-            />
-          )}
-        />
-        <Route path="/create" render={() => <Create onSubmit={addCard} />} />
+      <React.Fragment>
+        <Grid>
+          <Route
+            exact
+            path="/"
+            render={() => (
+              <CardsPage
+                cardData={cardData}
+                addComment={addComment}
+                deleteCard={deleteCard}
+              />
+            )}
+          />
+          <Route path="/create" render={() => <Create onSubmit={addCard} />} />
+        </Grid>
         <StyledNav>
           <StyledNavLink to="/">Home</StyledNavLink>
           <StyledNavLink to="/create">Create</StyledNavLink>
         </StyledNav>
-      </Grid>
+      </React.Fragment>
     </Router>
   )
 }
