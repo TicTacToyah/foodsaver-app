@@ -5,7 +5,7 @@ import CommentSection from './CommentSection'
 const CardBody = styled.section`
   background: #ffffff;
   box-shadow: 0px 15px 18px rgba(201, 201, 201, 0.5);
-  margin: 15px 0;
+  margin-bottom: 27px;
   padding: 5px;
 `
 

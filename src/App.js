@@ -12,6 +12,7 @@ export default function App() {
     grid-template-rows: 48px auto 48px;
     position: absolute;
     top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
   `
@@ -87,26 +88,25 @@ export default function App() {
 
   return (
     <Router>
-      <React.Fragment>
-        <Grid>
-          <Route
-            exact
-            path="/"
-            render={() => (
-              <CardsPage
-                cardData={cardData}
-                addComment={addComment}
-                deleteCard={deleteCard}
-              />
-            )}
-          />
-          <Route path="/create" render={() => <Create onSubmit={addCard} />} />
-        </Grid>
+      <Grid>
+        <div>HEADER</div>
+        <Route
+          exact
+          path="/"
+          render={() => (
+            <CardsPage
+              cardData={cardData}
+              addComment={addComment}
+              deleteCard={deleteCard}
+            />
+          )}
+        />
+        <Route path="/create" render={() => <Create onSubmit={addCard} />} />
         <StyledNav>
           <StyledNavLink to="/">Home</StyledNavLink>
           <StyledNavLink to="/create">Create</StyledNavLink>
         </StyledNav>
-      </React.Fragment>
+      </Grid>
     </Router>
   )
 }
