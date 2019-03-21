@@ -44,12 +44,12 @@ export default function App() {
     position: fixed;
     top: 0;
     background-color: rgba(187, 187, 187, 0.4);
-    justify-content: center;
-    align-items: center;
     width: 100%;
     border: solid white 2px;
     color: white;
     font-family: Helvetica, sans-serif;
+    margin-bottom: 10px;
+    overflow: scroll;
   `
 
   const [cardData, setCardData] = useState([
