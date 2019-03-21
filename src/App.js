@@ -21,31 +21,48 @@ export default function App() {
     display: grid;
     grid-auto-flow: column;
     font-family: Helvetica, sans-serif;
-    background-color: grey;
+    background-color: rgba(187, 187, 187, 0.4);
     position: fixed;
     bottom: 0;
     width: 100%;
   `
   const StyledNavLink = styled(NavLink)`
     height: 48px;
-    grid-auto-flow: column;
-    font-family: Helvetica, sans-serif;
-    text-decoration: none;
     display: flex;
     justify-content: center;
     align-items: center;
+    font-family: Helvetica, sans-serif;
+    text-decoration: none;
+    border: solid white 2px;
+    color: white;
   `
+  const StyledHeader = styled.div`
+    height: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    background-color: rgba(187, 187, 187, 0.4);
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    border: solid white 2px;
+    color: white;
+    font-family: Helvetica, sans-serif;
+  `
+
   const [cardData, setCardData] = useState([
     {
-      title: 'axel',
+      title: 'Banane',
       _id: 'gfhdjdfhjd',
       location: 'dfdd',
       smell: 'Okay',
       optic: 'Bio-Tonne',
       category: 'Frucht',
       comments: [
-        { name: 'toyah', message: 'lol' },
-        { name: 'Toto', message: 'egeh' },
+        { name: 'Toyah', message: 'Ich möchte die Banane gern abholen' },
+        { name: 'Alex', message: 'Wunderbar' },
       ],
     },
   ])
@@ -89,7 +106,7 @@ export default function App() {
   return (
     <Router>
       <Grid>
-        <div>HEADER</div>
+        <StyledHeader>Foodsaver</StyledHeader>
         <Route
           exact
           path="/"

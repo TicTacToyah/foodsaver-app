@@ -4,6 +4,7 @@ import { imageUpload } from './services'
 
 const StyledSection = styled.section`
   display: flex;
+  justify-content: center;
 `
 
 const StyledText = styled.p`
@@ -25,7 +26,6 @@ const StyledInput = styled.input`
 `
 
 const StyledButton = styled.button`
-  margin: 5px auto 0;
   height: 40px;
   border: solid grey 1px;
   font-family: Helvetica;
