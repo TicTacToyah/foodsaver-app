@@ -77,12 +77,12 @@ export default function App() {
   // }, [cardData])
 
   useEffect(() => {
-    setCardData([...cardData, ...getCardsFromStorage()])
+    setCardData([...cardData, getCardsFromStorage()])
   }, [])
 
   function addCard(data) {
-    setCardData([...cardData, { ...data, _id: uid(), comments: [] }])
-    saveCardsToStorage([...getCardsFromStorage(), { ...data, _id: uid() }])
+    setCardData([...cardData, { data, _id: uid(), comments: [] }])
+    saveCardsToStorage([getCardsFromStorage(), { data, _id: uid() }])
   }
 
   function addComment(commentData, card) {
