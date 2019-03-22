@@ -21,7 +21,7 @@ export default function CommentSection({ card, comments, addComment }) {
       {comments &&
         comments.map(comment => (
           <StyledComment key={comment._id}>
-            {dayjs(comment.date).format('DD/MM/YYYY hh:mm')}
+            {dayjs().format('DD/MM/YYYY hh:mm')}
             <StyledName>{comment.name}</StyledName>
             <p>{comment.message}</p>
           </StyledComment>
