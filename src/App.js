@@ -59,32 +59,32 @@ export default function App() {
     overflow: scroll;
   `
 
-  const [cardData, setCardData] = useState([
-    {
-      title: 'Banane',
-      _id: 'gfhdjdfhjd',
-      location: 'dfdd',
-      smell: 'Okay',
-      optic: 'Bio-Tonne',
-      category: 'Frucht',
-      comments: [
-        {
-          date: '',
-          name: 'Toyah',
-          message: 'Ich möchte die Banane gern abholen',
-        },
-        { date: '', name: 'Alex', message: 'Wunderbar' },
-      ],
-    },
-  ])
+  const [cardData, setCardData] = useState(getCardsFromStorage())
+  //   {
+  //     title: 'Banane',
+  //     _id: 'gfhdjdfhjd',
+  //     location: 'dfdd',
+  //     smell: 'Okay',
+  //     optic: 'Bio-Tonne',
+  //     category: 'Frucht',
+  //     comments: [
+  //       {
+  //         date: '',
+  //         name: 'Toyah',
+  //         message: 'Ich möchte die Banane gern abholen',
+  //       },
+  //       { date: '', name: 'Alex', message: 'Wunderbar' },
+  //     ],
+  //   },
+  // ])
   console.log(getAllCards(), 'Get')
 
   useEffect(() => {
     getAllCards().then(response => {
-      setCardData([...cardData, response])
+      setCardData([...cardData, ...response.data])
     })
   }, [])
-  console.log(cardData)
+  console.log(cardData, 'Card Data')
   // useEffect(() => {
   //   getCardsFromStorage()
   // }, [cardData])
@@ -99,16 +99,18 @@ export default function App() {
     saveCardsToStorage([...cardData, data])
     postNewCard(data).then(response => {
       setCardData([...cardData, response.data])
-      console.log(response)
+      console.log(response, 'response of add card')
     })
   }
 
   function addComment(commentData, card) {
-    console.log(commentData)
+    console.log(commentData, 'Comment Data')
     const index = cardData.findIndex(item => item === card)
     commentData.date = dayjs()
     commentData._id = uid()
+    console.log(index, 'Index')
     postComment(commentData, card).then(response => {
+      console.log(commentData, 'comment data')
       setCardData([
         ...cardData.slice(0, index),
         {
@@ -118,7 +120,6 @@ export default function App() {
           }),
         },
         ...cardData.slice(index + 1),
-        console.log(cardData, 'CardData'),
       ])
     })
 
