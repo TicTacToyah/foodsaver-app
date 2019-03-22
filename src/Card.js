@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import CommentSection from './CommentSection'
 
 const CardBody = styled.section`
+  display: grid;
+  grid-auto-rows: auto;
   background: #ffffff;
   box-shadow: 0px 15px 18px rgba(201, 201, 201, 0.5);
   margin-bottom: 27px;
@@ -62,6 +64,16 @@ const EyeIcon = styled.img`
   height: 20px;
   width: 16px;
 `
+const StyledButton = styled.button`
+  justify-self: end;
+  width: 20%;
+`
+const CommentIcon = styled.img`
+  height: 20px;
+  width: 16px;
+  margin-bottom: -4px;
+  padding-left: 2px;
+`
 
 export default function Card({
   card,
@@ -75,6 +87,9 @@ export default function Card({
   addComment,
   deleteCard,
 }) {
+  const commentCount = comments.length
+
+  const [isHidden, setIsHidden] = useState(false)
   return (
     <CardBody>
       <button onClick={deleteCard}>X</button>
@@ -91,7 +106,17 @@ export default function Card({
           <CardListItem>{optic}</CardListItem>
         </CardList>
       </CardInformation>
-      <CommentSection comments={comments} addComment={addComment} card={card} />
+      <StyledButton onClick={() => setIsHidden(!isHidden)}>
+        {commentCount}
+        <CommentIcon src={require('./images/comment.svg')} alt="" />
+      </StyledButton>
+      {isHidden && (
+        <CommentSection
+          comments={comments}
+          addComment={addComment}
+          card={card}
+        />
+      )}
     </CardBody>
   )
 }
