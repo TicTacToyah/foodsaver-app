@@ -5,7 +5,6 @@ import { imageUpload } from './services'
 const StyledForm = styled.form`
   margin-top: 50px;
   width: 100vw;
-  align-content: space-around;
   grid-gap: 20px;
 `
 

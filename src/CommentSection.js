@@ -1,7 +1,7 @@
 import React from 'react'
 import CreateComment from './CreateComment'
 import styled from 'styled-components'
-
+import dayjs from 'dayjs'
 const StyledComment = styled.div`
   font-family: Helvetica, sans-serif;
   background-color: #f8f8ff;
@@ -21,6 +21,7 @@ export default function CommentSection({ card, comments, addComment }) {
       {comments &&
         comments.map(comment => (
           <StyledComment key={comment._id}>
+            {dayjs(comment.date).format('DD/MM/YYYY hh:mm')}
             <StyledName>{comment.name}</StyledName>
             <p>{comment.message}</p>
           </StyledComment>

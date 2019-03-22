@@ -9,6 +9,7 @@
     "babel-loader": "8.0.5",
     "babel-plugin-jsx-remove-data-test-id": "2.0.0",
     "babel-plugin-styled-components": "1.10.0",
+    "dayjs": "^1.8.11",
     "internal-ip-cli": "1.0.0",
     "prop-types": "15.7.2",
     "react": "^16.8.2",

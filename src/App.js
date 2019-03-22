@@ -6,6 +6,7 @@ import uid from 'uid'
 import { saveCardsToStorage, getCardsFromStorage } from './services'
 import GlobalStyles from './GlobalStyles'
 import styled from 'styled-components'
+import dayjs from 'dayjs'
 export default function App() {
   const Grid = styled.div`
     display: grid;
@@ -61,8 +62,12 @@ export default function App() {
       optic: 'Bio-Tonne',
       category: 'Frucht',
       comments: [
-        { name: 'Toyah', message: 'Ich möchte die Banane gern abholen' },
-        { name: 'Alex', message: 'Wunderbar' },
+        {
+          date: '',
+          name: 'Toyah',
+          message: 'Ich möchte die Banane gern abholen',
+        },
+        { date: '', name: 'Alex', message: 'Wunderbar' },
       ],
     },
   ])
@@ -88,6 +93,7 @@ export default function App() {
       {
         ...cardData[index],
         ...cardData[index].comments.push({
+          date: dayjs(),
           name: commentData.name,
           message: commentData.message,
           _id: uid(),
@@ -95,6 +101,7 @@ export default function App() {
       },
       ...cardData.slice(index + 1),
     ])
+    console.log(commentData.date)
   }
 
   function deleteCard(card) {
