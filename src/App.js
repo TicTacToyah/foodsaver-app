@@ -3,7 +3,12 @@ import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom'
 import CardsPage from './CardsPage'
 import Create from './Create'
 import uid from 'uid'
-import { saveCardsToStorage, getCardsFromStorage } from './services'
+import {
+  saveCardsToStorage,
+  getCardsFromStorage,
+  getAllCards,
+  postNewCard,
+} from './services'
 import GlobalStyles from './GlobalStyles'
 import styled from 'styled-components'
 import dayjs from 'dayjs'
@@ -77,11 +82,15 @@ export default function App() {
   // }, [cardData])
 
   useEffect(() => {
-    setCardData([...cardData, ...getCardsFromStorage()])
+    setCardData([...cardData, ...getAllCards()])
   }, [])
 
   function addCard(data) {
-    setCardData([...cardData, { ...data, _id: uid(), comments: [] }])
+    data._id = uid()
+    data.comments = []
+    postNewCard(data).then(response =>
+      setCardData([...cardData, { ...data, _id: uid(), comments: [] }])
+    )
     saveCardsToStorage([...getCardsFromStorage(), { ...data, _id: uid() }])
   }
 
