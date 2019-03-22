@@ -71,7 +71,8 @@ const StyledButton = styled.button`
 const CommentIcon = styled.img`
   height: 20px;
   width: 16px;
-  margin-bottom: -2px;
+  margin-bottom: -4px;
+  padding-left: 2px;
 `
 
 export default function Card({
