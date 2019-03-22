@@ -77,21 +77,22 @@ export default function App() {
     },
   ])
 
-  // useEffect(() => {
-  //   saveCardsToStorage(cardData)
-  // }, [cardData])
-
   useEffect(() => {
-    setCardData([...cardData, ...getAllCards()])
+    setCardData([...cardData], getAllCards())
   }, [])
+
+  // useEffect(() => {
+  //   getCardsFromStorage()
+  // }, [cardData])
 
   function addCard(data) {
     data._id = uid()
     data.comments = []
-    postNewCard(data).then(response =>
-      setCardData([...cardData, { ...data, _id: uid(), comments: [] }])
-    )
-    saveCardsToStorage([...getCardsFromStorage(), { ...data, _id: uid() }])
+    console.log(data, 'badamman')
+    saveCardsToStorage(data)
+    setCardData([...cardData, { data }])
+    console.log(cardData)
+    postNewCard(data).then(response => setCardData([...cardData, { response }]))
   }
 
   function addComment(commentData, card) {
