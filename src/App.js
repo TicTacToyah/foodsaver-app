@@ -8,6 +8,7 @@ import {
   getCardsFromStorage,
   getAllCards,
   postNewCard,
+  postComment,
 } from './services'
 import GlobalStyles from './GlobalStyles'
 import styled from 'styled-components'
@@ -76,41 +77,57 @@ export default function App() {
       ],
     },
   ])
+  console.log(getAllCards(), 'Get')
 
   useEffect(() => {
-    setCardData([...cardData, getCardsFromStorage()])
+    getAllCards().then(response => {
+      setCardData([...cardData, response])
+    })
   }, [])
-
+  console.log(cardData)
   // useEffect(() => {
   //   getCardsFromStorage()
   // }, [cardData])
 
+  // function addCard(data) {
+  //   setCardData([...cardData, { data, _id: uid(), comments: [] }])
+  //   saveCardsToStorage([getCardsFromStorage(), { data, _id: uid() }])
+  // }
   function addCard(data) {
-    setCardData([...cardData, { data, _id: uid(), comments: [] }])
-    saveCardsToStorage([getCardsFromStorage(), { data, _id: uid() }])
+    data._id = uid()
+    data.comments = []
+    saveCardsToStorage([...cardData, data])
+    postNewCard(data).then(response => {
+      setCardData([...cardData, response.data])
+      console.log(response)
+    })
   }
 
   function addComment(commentData, card) {
+    console.log(commentData)
     const index = cardData.findIndex(item => item === card)
+    commentData.date = dayjs()
+    commentData._id = uid()
+    postComment(commentData, card).then(response => {
+      setCardData([
+        ...cardData.slice(0, index),
+        {
+          ...cardData[index],
+          ...cardData[index].comments.push({
+            ...commentData,
+          }),
+        },
+        ...cardData.slice(index + 1),
+        console.log(cardData, 'CardData'),
+      ])
+    })
 
-    setCardData([
-      ...cardData.slice(0, index),
-      {
-        ...cardData[index],
-        ...cardData[index].comments.push({
-          date: dayjs(),
-          name: commentData.name,
-          message: commentData.message,
-          _id: uid(),
-        }),
-      },
-      ...cardData.slice(index + 1),
-    ])
     console.log(commentData.date)
   }
 
   function deleteCard(card) {
     const index = cardData.findIndex(item => item === card)
+    console.log(index, 'INDEy!')
 
     setCardData([...cardData.slice(0, index), ...cardData.slice(index + 1)])
   }

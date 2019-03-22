@@ -10,6 +10,7 @@ const CardContainer = styled.section`
 `
 
 export default function CardsPage({ cardData, addComment, deleteCard }) {
+  console.log(cardData, 'Cards Page')
   return (
     <CardContainer>
       {cardData.map(card => (

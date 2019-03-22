@@ -87,9 +87,16 @@ export default function Card({
   addComment,
   deleteCard,
 }) {
-  const commentCount = comments.length
+  function countComments() {
+    if (comments === undefined) {
+      return 0
+    } else {
+      return comments.length
+    }
+  }
 
   const [isHidden, setIsHidden] = useState(false)
+
   return (
     <CardBody>
       <button onClick={deleteCard}>X</button>
@@ -107,7 +114,7 @@ export default function Card({
         </CardList>
       </CardInformation>
       <StyledButton onClick={() => setIsHidden(!isHidden)}>
-        {commentCount}
+        {countComments()}
         <CommentIcon src={require('./images/comment.svg')} alt="" />
       </StyledButton>
       {isHidden && (

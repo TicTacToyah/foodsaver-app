@@ -13,9 +13,10 @@ export function postNewCard(card) {
   return axios.post(cardsPath, card)
 }
 
-export function toggleCardBookmark(card) {
+export function postComment(comment, card) {
+  console.log(comment)
   return axios.patch(`${cardsPath}/${card._id}`, {
-    bookmarked: !card.bookmarked,
+    comments: [comment],
   })
 }
 

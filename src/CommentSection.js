@@ -16,6 +16,7 @@ const StyledName = styled.h4`
 `
 
 export default function CommentSection({ card, comments, addComment }) {
+  console.log('Comments')
   return (
     <div>
       {comments &&
