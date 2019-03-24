@@ -10,13 +10,9 @@ const StyledComment = styled.div`
   padding: 5px 10px;
   font-size: 0.8em;
 `
-const StyledDate = `
-justify-content: flex-end;
-`
 
 const StyledName = styled.h4`
   font-weight: normal;
-  margin: 0;
 `
 
 export default function CommentSection({ card, comments, addComment }) {

@@ -6,8 +6,14 @@ const StyledForm = styled.form`
   grid-auto-rows: auto;
   margin-bottom: 5px;
   border-radius: 5px;
-  margin: 0 5% 1%;
+  margin: 2% 5% 1%;
 `
+const StyledInput = styled.input`
+  font-size: 0.8em;
+  border-radius: 5px;
+  border: lightgrey 1px solid;
+`
+
 const StyledTextarea = styled.textarea`
   font-size: 0.8em;
   border-radius: 5px;
@@ -16,9 +22,13 @@ const StyledTextarea = styled.textarea`
 `
 
 const StyledButton = styled.button`
-  font-size: 0.8em;
+  width: 50%;
+  justify-self: center;
+  font-size: 1em;
   background: #1be5b6;
   border-radius: 5px;
+  color: whitesmoke;
+  font-style: bold;
 `
 export default function Comment({ addComment, card }) {
   const defaultComment = {
@@ -40,12 +50,13 @@ export default function Comment({ addComment, card }) {
 
   return (
     <StyledForm onSubmit={submitHandler}>
-      <input
+      <StyledInput
         onChange={onInputChange}
         type="text"
         name="name"
         value={commentData.name}
         placeholder="Dein Name"
+        maxLength="20"
       />
       <StyledTextarea
         name="message"
