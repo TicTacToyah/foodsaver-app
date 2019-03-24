@@ -10,6 +10,10 @@ const StyledComment = styled.div`
   padding: 5px 10px;
   font-size: 0.8em;
 `
+const StyledDate = `
+justify-content: flex-end;
+`
+
 const StyledName = styled.h4`
   font-weight: normal;
   margin: 0;
@@ -22,7 +26,7 @@ export default function CommentSection({ card, comments, addComment }) {
       {comments &&
         comments.map(comment => (
           <StyledComment key={comment._id}>
-            {dayjs().format('DD/MM/YYYY hh:mm')}
+            <span>{dayjs().format('DD/MM/YYYY hh:mm')}</span>
             <StyledName>{comment.name}</StyledName>
             <p>{comment.message}</p>
           </StyledComment>

@@ -2,16 +2,22 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 
 const StyledForm = styled.form`
+  display: grid;
+  grid-auto-rows: auto;
   margin-bottom: 5px;
-  border: #ff6347 1px solid;
+  border-radius: 5px;
+  margin: 0 5% 1%;
 `
 const StyledTextarea = styled.textarea`
   font-size: 0.8em;
+  border-radius: 5px;
+  border: lightgrey 1px solid;
+  margin: 1% 0;
 `
 
 const StyledButton = styled.button`
   font-size: 0.8em;
-  background: #ff6347;
+  background: #1be5b6;
   border-radius: 5px;
 `
 export default function Comment({ addComment, card }) {
