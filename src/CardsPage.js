@@ -1,9 +1,18 @@
 import React from 'react'
 import Card from './Card'
+import styled from 'styled-components'
+
+const CardContainer = styled.section`
+  display: grid;
+  grid-auto-rows: auto;
+  grid-gap: 10px;
+  padding: 0 15px 29px 15px;
+`
 
 export default function CardsPage({ cardData, addComment, deleteCard }) {
+  console.log(cardData, 'Cards Page')
   return (
-    <div>
+    <CardContainer>
       {cardData.map(card => (
         <Card
           card={card}
@@ -19,6 +28,6 @@ export default function CardsPage({ cardData, addComment, deleteCard }) {
           deleteCard={() => deleteCard(card)}
         />
       ))}
-    </div>
+    </CardContainer>
   )
 }

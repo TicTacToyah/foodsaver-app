@@ -3,12 +3,20 @@ import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom'
 import CardsPage from './CardsPage'
 import Create from './Create'
 import uid from 'uid'
-import { saveCardsToStorage, getCardsFromStorage } from './services'
+import {
+  saveCardsToStorage,
+  getCardsFromStorage,
+  getAllCards,
+  postNewCard,
+  postComment,
+} from './services'
+import GlobalStyles from './GlobalStyles'
 import styled from 'styled-components'
+import dayjs from 'dayjs'
 export default function App() {
   const Grid = styled.div`
     display: grid;
-    grid-template-rows: auto 48px;
+    grid-template-rows: 48px auto 48px;
     position: absolute;
     top: 0;
     left: 0;
@@ -19,71 +27,82 @@ export default function App() {
   const StyledNav = styled.nav`
     display: grid;
     grid-auto-flow: column;
-    grid-gap: 2px;
     font-family: Helvetica, sans-serif;
-    background-color: grey;
-    font-style: grey;
-    text-decoration: none;
-    overflow: hidden;
+    background-color: rgba(187, 187, 187, 0.4);
+    position: fixed;
+    bottom: 0;
+    width: 100%;
   `
   const StyledNavLink = styled(NavLink)`
+    height: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-family: Helvetica, sans-serif;
     text-decoration: none;
+    border: solid white 2px;
+    color: white;
   `
-  const [cardData, setCardData] = useState([
-    {
-      title: 'axel',
-      _id: 'gfhdjdfhjd',
-      location: 'dfdd',
-      smell: 'Okay',
-      optic: 'Bio-Tonne',
-      category: 'Frucht',
-      comments: [
-        { name: 'toyah', message: 'lol' },
-        { name: 'Toto', message: 'egeh' },
-      ],
-    },
-  ])
+  const StyledHeader = styled.div`
+    height: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    background-color: rgba(187, 187, 187, 0.4);
+    width: 100%;
+    border: solid white 2px;
+    color: white;
+    font-family: Helvetica, sans-serif;
+    margin-bottom: 10px;
+    overflow: scroll;
+  `
 
-  // useEffect(() => {
-  //   saveCardsToStorage(cardData)
-  // }, [cardData])
+  const [cardData, setCardData] = useState(getCardsFromStorage())
 
   useEffect(() => {
-    setCardData([...cardData, ...getCardsFromStorage()])
+    getAllCards().then(response => {
+      setCardData([...cardData, ...response.data])
+    })
   }, [])
 
   function addCard(data) {
-    setCardData([...cardData, { ...data, _id: uid(), comments: [] }])
-    saveCardsToStorage([...getCardsFromStorage(), { ...data, _id: uid() }])
+    data._id = uid()
+    data.comments = []
+    saveCardsToStorage([...cardData, data])
+    postNewCard(data).then(response => {
+      setCardData([...cardData, response.data])
+    })
   }
 
   function addComment(commentData, card) {
     const index = cardData.findIndex(item => item === card)
-
-    setCardData([
-      ...cardData.slice(0, index),
-      {
-        ...cardData[index],
-        ...cardData[index].comments.push({
-          name: commentData.name,
-          message: commentData.message,
-          _id: uid(),
-        }),
-      },
-      ...cardData.slice(index + 1),
-    ])
+    commentData.date = dayjs()
+    commentData._id = uid()
+    postComment(commentData, card).then(response => {
+      setCardData([
+        ...cardData.slice(0, index),
+        {
+          ...cardData[index],
+          ...cardData[index].comments.push({
+            ...commentData,
+          }),
+        },
+        ...cardData.slice(index + 1),
+      ])
+    })
   }
 
   function deleteCard(card) {
     const index = cardData.findIndex(item => item === card)
-
     setCardData([...cardData.slice(0, index), ...cardData.slice(index + 1)])
   }
 
   return (
     <Router>
       <Grid>
+        <StyledHeader>Foodsaver</StyledHeader>
         <Route
           exact
           path="/"

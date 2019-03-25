@@ -7,7 +7,7 @@ const CardBody = styled.section`
   grid-auto-rows: auto;
   background: #ffffff;
   box-shadow: 0px 15px 18px rgba(201, 201, 201, 0.5);
-  margin: 15px 0;
+  margin-bottom: 28px;
   padding: 5px;
 `
 
@@ -87,9 +87,16 @@ export default function Card({
   addComment,
   deleteCard,
 }) {
-  const commentCount = comments.length
+  function countComments() {
+    if (comments === undefined) {
+      return 0
+    } else {
+      return comments.length
+    }
+  }
 
   const [isHidden, setIsHidden] = useState(false)
+
   return (
     <CardBody>
       <button onClick={deleteCard}>X</button>
@@ -107,7 +114,7 @@ export default function Card({
         </CardList>
       </CardInformation>
       <StyledButton onClick={() => setIsHidden(!isHidden)}>
-        {commentCount}
+        {countComments()}
         <CommentIcon src={require('./images/comment.svg')} alt="" />
       </StyledButton>
       {isHidden && (
