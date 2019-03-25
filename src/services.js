@@ -14,7 +14,6 @@ export function postNewCard(card) {
 }
 
 export function postComment(comment, card) {
-  console.log(comment)
   return axios.patch(`${cardsPath}/${card._id}`, {
     comments: [comment],
   })

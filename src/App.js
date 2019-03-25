@@ -70,7 +70,6 @@ export default function App() {
   function addCard(data) {
     data._id = uid()
     data.comments = []
-    saveCardsToStorage([...cardData, data])
     postNewCard(data).then(response => {
       setCardData([...cardData, response.data])
     })
@@ -102,7 +101,6 @@ export default function App() {
   return (
     <Router>
       <Grid>
-        <StyledHeader>Foodsaver</StyledHeader>
         <Route
           exact
           path="/"
