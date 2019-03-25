@@ -20,7 +20,7 @@ const CardInformation = styled.section`
 `
 const CardCategory = styled.h3`
   font-family: Helvetica;
-  font-size: 0.8em;
+  font-size: 1em;
   color: #9e9e9e;
 `
 
@@ -43,7 +43,7 @@ const CardListItem = styled.li`
   margin: 0 10px 10px 0;
   padding: 2px 6px;
   font-family: Helvetica, sans-serif;
-  font-size: 0.8em;
+  font-size1;
   color: #9e9e9e;
 `
 
@@ -66,6 +66,8 @@ const EyeIcon = styled.img`
 `
 const StyledButton = styled.button`
   justify-self: end;
+  background: transparent;
+  border: none;
   width: 20%;
 `
 const CommentIcon = styled.img`
@@ -73,6 +75,17 @@ const CommentIcon = styled.img`
   width: 16px;
   margin-bottom: -4px;
   padding-left: 2px;
+`
+const DeleteIcon = styled.img`
+  height: 20px;
+  width: 16px;
+`
+
+const StyledDeleteButton = styled.button`
+  justify-self: end;
+  width: 20%;
+  background: transparent;
+  border: none;
 `
 
 export default function Card({
@@ -99,7 +112,9 @@ export default function Card({
 
   return (
     <CardBody>
-      <button onClick={deleteCard}>X</button>
+      <StyledDeleteButton onClick={deleteCard}>
+        <DeleteIcon src={require('./images/round-delete-button.svg')} />
+      </StyledDeleteButton>
       <CardImage src={image} />
       <CardInformation>
         <CardCategory>{category}</CardCategory>

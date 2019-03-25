@@ -9,13 +9,13 @@ const StyledForm = styled.form`
   margin: 2% 5% 1%;
 `
 const StyledInput = styled.input`
-  font-size: 0.8em;
+  font-size: 1em;
   border-radius: 5px;
   border: lightgrey 1px solid;
 `
 
 const StyledTextarea = styled.textarea`
-  font-size: 0.8em;
+  font-size: 1em;
   border-radius: 5px;
   border: lightgrey 1px solid;
   margin: 1% 0;
@@ -24,10 +24,11 @@ const StyledTextarea = styled.textarea`
 const StyledButton = styled.button`
   width: 50%;
   justify-self: center;
-  font-size: 1em;
-  background: #1be5b6;
+  font-size: 1.2em;
+  background: #76ca8f;
+  border: none;
   border-radius: 5px;
-  color: whitesmoke;
+  color: #333333;
   font-style: bold;
 `
 export default function Comment({ addComment, card }) {
