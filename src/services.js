@@ -13,6 +13,10 @@ export function postNewCard(card) {
   return axios.post(cardsPath, card)
 }
 
+export function deleteStoredCard(card) {
+  return axios.delete(`${cardsPath}/${card._id}`)
+}
+
 export function postComment(comment, card) {
   return axios.patch(`${cardsPath}/${card._id}`, {
     comments: [comment],
