@@ -17,7 +17,7 @@ export default function CardsPage({ cardData, addComment, deleteCard }) {
         <Card
           card={card}
           category={card.category}
-          image={card.imageURL}
+          image={card.image}
           title={card.title}
           location={card.location}
           smell={card.smell}
