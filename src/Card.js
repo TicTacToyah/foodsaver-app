@@ -7,7 +7,7 @@ const CardBody = styled.section`
   grid-auto-rows: auto;
   background: #ffffff;
   box-shadow: 0px 15px 18px rgba(201, 201, 201, 0.5);
-  margin-bottom: 27px;
+  margin-bottom: 28px;
   padding: 5px;
 `
 

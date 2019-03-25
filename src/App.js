@@ -60,57 +60,27 @@ export default function App() {
   `
 
   const [cardData, setCardData] = useState(getCardsFromStorage())
-  //   {
-  //     title: 'Banane',
-  //     _id: 'gfhdjdfhjd',
-  //     location: 'dfdd',
-  //     smell: 'Okay',
-  //     optic: 'Bio-Tonne',
-  //     category: 'Frucht',
-  //     comments: [
-  //       {
-  //         date: '',
-  //         name: 'Toyah',
-  //         message: 'Ich möchte die Banane gern abholen',
-  //       },
-  //       { date: '', name: 'Alex', message: 'Wunderbar' },
-  //     ],
-  //   },
-  // ])
-  console.log(getAllCards(), 'Get')
 
   useEffect(() => {
     getAllCards().then(response => {
       setCardData([...cardData, ...response.data])
     })
   }, [])
-  console.log(cardData, 'Card Data')
-  // useEffect(() => {
-  //   getCardsFromStorage()
-  // }, [cardData])
 
-  // function addCard(data) {
-  //   setCardData([...cardData, { data, _id: uid(), comments: [] }])
-  //   saveCardsToStorage([getCardsFromStorage(), { data, _id: uid() }])
-  // }
   function addCard(data) {
     data._id = uid()
     data.comments = []
     saveCardsToStorage([...cardData, data])
     postNewCard(data).then(response => {
       setCardData([...cardData, response.data])
-      console.log(response, 'response of add card')
     })
   }
 
   function addComment(commentData, card) {
-    console.log(commentData, 'Comment Data')
     const index = cardData.findIndex(item => item === card)
     commentData.date = dayjs()
     commentData._id = uid()
-    console.log(index, 'Index')
     postComment(commentData, card).then(response => {
-      console.log(commentData, 'comment data')
       setCardData([
         ...cardData.slice(0, index),
         {
@@ -122,14 +92,10 @@ export default function App() {
         ...cardData.slice(index + 1),
       ])
     })
-
-    console.log(commentData.date)
   }
 
   function deleteCard(card) {
     const index = cardData.findIndex(item => item === card)
-    console.log(index, 'INDEy!')
-
     setCardData([...cardData.slice(0, index), ...cardData.slice(index + 1)])
   }
 
