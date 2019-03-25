@@ -68,8 +68,8 @@ export default function Create({ onSubmit, upload }) {
     <StyledSection>
       <form onSubmit={onSubmitHandler}>
         <div>
-          {data.image ? (
-            <img src={data.image} alt="" style={{ width: '100%' }} />
+          {data.imageURL ? (
+            <img src={data.imageURL} alt="" style={{ width: '100%' }} />
           ) : (
             <input type="file" name="file" onChange={fileHandler} />
           )}
