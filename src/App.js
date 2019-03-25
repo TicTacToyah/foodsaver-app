@@ -9,6 +9,7 @@ import {
   getAllCards,
   postNewCard,
   postComment,
+  deleteStoredCard,
 } from './services'
 import GlobalStyles from './GlobalStyles'
 import styled from 'styled-components'
@@ -95,7 +96,9 @@ export default function App() {
 
   function deleteCard(card) {
     const index = cardData.findIndex(item => item === card)
-    setCardData([...cardData.slice(0, index), ...cardData.slice(index + 1)])
+    deleteStoredCard(card).then(response => {
+      setCardData([...cardData.slice(0, index), ...cardData.slice(index + 1)])
+    })
   }
 
   return (
