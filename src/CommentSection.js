@@ -3,6 +3,8 @@ import CreateComment from './CreateComment'
 import styled from 'styled-components'
 import dayjs from 'dayjs'
 const StyledComment = styled.div`
+  display: grid;
+  grid-auto-rows: auto;
   font-family: Helvetica, sans-serif;
   background-color: #f8f8ff;
   border-radius: 5px;
@@ -14,14 +16,27 @@ const StyledName = styled.h4`
   font-weight: normal;
   margin: 0;
 `
+const StyledButton = styled.button`
+  justify-self: end;
+  width: 10%;
+  background: transparent;
+  border: none;
+`
 
-export default function CommentSection({ card, comments, addComment }) {
-  console.log('Comments')
+export default function CommentSection({
+  card,
+  comments,
+  addComment,
+  deleteComment,
+}) {
   return (
     <div>
       {comments &&
         comments.map(comment => (
           <StyledComment key={comment._id}>
+            <StyledButton onClick={() => deleteComment(card, comment)}>
+              X
+            </StyledButton>
             {dayjs().format('DD/MM/YYYY hh:mm')}
             <StyledName>{comment.name}</StyledName>
             <p>{comment.message}</p>
