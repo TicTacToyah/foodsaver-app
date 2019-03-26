@@ -4,12 +4,12 @@ import CardsPage from './CardsPage'
 import Create from './Create'
 import uid from 'uid'
 import {
-  saveCardsToStorage,
   getCardsFromStorage,
   getAllCards,
   postNewCard,
   postComment,
   deleteStoredCard,
+  deleteStoredComment,
 } from './services'
 import GlobalStyles from './GlobalStyles'
 import styled from 'styled-components'
@@ -101,6 +101,19 @@ export default function App() {
     })
   }
 
+  function deleteComment(card, comment) {
+    const index = cardData.findIndex(item => item === card)
+    const commentIndex = cardData[index].comments.findIndex(
+      item => item === comment
+    )
+    deleteStoredComment(comment).then(response => {
+      setCardData([
+        ...cardData,
+        cardData[index].comments.splice(commentIndex, 1),
+      ])
+    })
+  }
+
   return (
     <Router>
       <Grid>
@@ -112,6 +125,7 @@ export default function App() {
               cardData={cardData}
               addComment={addComment}
               deleteCard={deleteCard}
+              deleteComment={deleteComment}
             />
           )}
         />
