@@ -26,7 +26,7 @@ const StyledNav = styled.nav`
   display: grid;
   grid-auto-flow: column;
   font-family: Helvetica, sans-serif;
-  background-color: rgba(187, 187, 187, 0.4);
+  background-color: whitesmoke;
   position: fixed;
   bottom: 0;
   width: 100%;
@@ -38,8 +38,7 @@ const StyledNavLink = styled(NavLink)`
   align-items: center;
   font-family: Helvetica, sans-serif;
   text-decoration: none;
-  border: solid white 2px;
-  color: white;
+  color: #76ca8f;
 `
 const StyledHeader = styled.header`
   height: 48px;
@@ -48,11 +47,12 @@ const StyledHeader = styled.header`
   align-items: center;
   position: fixed;
   top: 0;
-  background-color: rgba(187, 187, 187, 0.4);
+  background-color: whitesmoke;
   width: 100%;
   border: solid white 2px;
   color: white;
-  font-family: Helvetica, sans-serif;
+  font: 1.5em Helvetica, sans-serif;
+  color: #76ca8f;
   margin-bottom: 10px;
   overflow: scroll;
 `
@@ -112,7 +112,7 @@ export default function App() {
   return (
     <Router>
       <Grid>
-        <StyledHeader />
+        <StyledHeader>FoodSaver</StyledHeader>
         <Route
           exact
           path="/"

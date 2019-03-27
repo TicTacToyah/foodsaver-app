@@ -21,21 +21,24 @@ const StyledDate = styled.div`
   font-family: Helvetica, sans-serif;
   color: #858585;
   font-size: 0.8em;
+  justify-self: flex-end;
 `
 
 const StyledName = styled.h4`
-  font-weight: normal;
+  font-weight: bold;
   margin: 2px 4px;
+  color: #76ca8f;
 `
 const StyledParagraph = styled.p`
   margin: 2px 4px;
 `
 const StyledButton = styled.button`
-  justify-self: end;
+  color: #858585;
+  font-size: 0.8em;
+  justify-self: flex-start;
   width: 10%;
   background: transparent;
   border: none;
-  color: #76ca8f;
 `
 
 export default function CommentSection({
@@ -55,7 +58,7 @@ export default function CommentSection({
             <StyledDate>
               {dayjs(comment.date).format('DD.MM.YYYY HH:mm')}
             </StyledDate>
-            <StyledName>{comment.name}</StyledName>
+            <StyledName>{comment.name}:</StyledName>
             <StyledParagraph>{comment.message}</StyledParagraph>
           </StyledComment>
         ))}
