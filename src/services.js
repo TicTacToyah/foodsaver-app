@@ -17,13 +17,13 @@ export function deleteStoredCard(card) {
   return axios.delete(`${cardsPath}/${card._id}`)
 }
 
-export function deleteStoredComment(comment) {
-  return axios.delete(`${cardsPath}/${comment._id}`)
+export function deleteStoredComment(comment, card) {
+  return axios.patch(`${cardsPath}/${comment._id}/comment`, card)
 }
 
 export function postComment(comment, card) {
   return axios.patch(`${cardsPath}/${card._id}`, {
-    comments: [comment],
+    comment,
   })
 }
 

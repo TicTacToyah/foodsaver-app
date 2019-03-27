@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
+import dayjs from 'dayjs'
 
 const StyledForm = styled.form`
   display: grid;
@@ -16,6 +17,7 @@ const StyledInput = styled.input`
 
 const StyledTextarea = styled.textarea`
   font-size: 1em;
+  font-family: Helvetica, sans-serif;
   border-radius: 5px;
   border: lightgrey 1px solid;
   margin: 1% 0;
@@ -33,6 +35,7 @@ const StyledButton = styled.button`
 `
 export default function Comment({ addComment, card }) {
   const defaultComment = {
+    date: dayjs(),
     name: '',
     message: '',
   }

@@ -9,10 +9,13 @@ const CardBody = styled.section`
   box-shadow: 0px 15px 18px rgba(201, 201, 201, 0.5);
   margin-bottom: 28px;
   padding: 5px;
+  border: rgba(201, 201, 201, 0.2) solid 1px;
 `
 
 const CardImage = styled.img`
   width: 100%;
+  height: 200px;
+  object-fit: cover;
 `
 
 const CardInformation = styled.section`
@@ -21,13 +24,14 @@ const CardInformation = styled.section`
 const CardCategory = styled.h3`
   font-family: Helvetica;
   font-size: 1em;
-  color: #9e9e9e;
+  color: #858585;
 `
 
 const CardHeadline = styled.h2`
   font-family: Helvetica;
   color: #333333;
   font-style: normal;
+  font-size: 1.4em;
 `
 
 const CardList = styled.ul`
@@ -43,8 +47,7 @@ const CardListItem = styled.li`
   margin: 0 10px 10px 0;
   padding: 2px 6px;
   font-family: Helvetica, sans-serif;
-  font-size1;
-  color: #9e9e9e;
+  color: #858585;
 `
 
 const LocationIcon = styled.img`
