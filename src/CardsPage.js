@@ -6,7 +6,7 @@ const CardContainer = styled.section`
   display: grid;
   grid-auto-rows: auto;
   grid-gap: 10px;
-  padding: 0 15px 29px 15px;
+  padding: 52px 15px 50px 15px;
 `
 
 export default function CardsPage({

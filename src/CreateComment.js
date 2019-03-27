@@ -1,21 +1,41 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
+import dayjs from 'dayjs'
 
 const StyledForm = styled.form`
+  display: grid;
+  grid-auto-rows: auto;
   margin-bottom: 5px;
-  border: #ff6347 1px solid;
+  border-radius: 5px;
+  margin: 2% 5% 1%;
 `
+const StyledInput = styled.input`
+  font-size: 1em;
+  border-radius: 5px;
+  border: lightgrey 1px solid;
+`
+
 const StyledTextarea = styled.textarea`
-  font-size: 0.8em;
+  font-size: 1em;
+  font-family: Helvetica, sans-serif;
+  border-radius: 5px;
+  border: lightgrey 1px solid;
+  margin: 1% 0;
 `
 
 const StyledButton = styled.button`
-  font-size: 0.8em;
-  background: #ff6347;
+  width: 50%;
+  justify-self: center;
+  font-size: 1.2em;
+  background: #76ca8f;
+  border: none;
   border-radius: 5px;
+  color: #333333;
+  font-style: bold;
 `
 export default function Comment({ addComment, card }) {
   const defaultComment = {
+    date: dayjs(),
     name: '',
     message: '',
   }
@@ -34,12 +54,13 @@ export default function Comment({ addComment, card }) {
 
   return (
     <StyledForm onSubmit={submitHandler}>
-      <input
+      <StyledInput
         onChange={onInputChange}
         type="text"
         name="name"
         value={commentData.name}
         placeholder="Dein Name"
+        maxLength="20"
       />
       <StyledTextarea
         name="message"

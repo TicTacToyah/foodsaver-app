@@ -2,6 +2,10 @@ import React from 'react'
 import CreateComment from './CreateComment'
 import styled from 'styled-components'
 import dayjs from 'dayjs'
+import relativeTime from 'dayjs/plugin/relativeTime'
+
+dayjs.extend(relativeTime)
+
 const StyledComment = styled.div`
   display: grid;
   grid-auto-rows: auto;
@@ -12,6 +16,7 @@ const StyledComment = styled.div`
   padding: 5px 10px;
   font-size: 0.8em;
 `
+
 const StyledName = styled.h4`
   font-weight: normal;
   margin: 0;
@@ -37,7 +42,7 @@ export default function CommentSection({
             <StyledButton onClick={() => deleteComment(card, comment)}>
               X
             </StyledButton>
-            {dayjs().format('DD/MM/YYYY hh:mm')}
+            {dayjs(comment.date).format('DD.MM.YYYY HH:mm')}
             <StyledName>{comment.name}</StyledName>
             <p>{comment.message}</p>
           </StyledComment>
