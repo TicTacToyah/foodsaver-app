@@ -40,7 +40,7 @@ const StyledNavLink = styled(NavLink)`
   text-decoration: none;
   color: #76ca8f;
 `
-const StyledHeader = styled.header`
+/*const StyledHeader = styled.header`
   height: 48px;
   display: flex;
   justify-content: center;
@@ -56,6 +56,7 @@ const StyledHeader = styled.header`
   margin-bottom: 10px;
   overflow: scroll;
 `
+*/
 
 export default function App() {
   const [cardData, setCardData] = useState(getCardsFromStorage())

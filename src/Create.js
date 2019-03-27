@@ -48,6 +48,7 @@ export default function Create({ onSubmit, upload }) {
     event.preventDefault()
     onSubmit(data)
     setData(defaultData)
+    setImage('')
   }
   const [data, setData] = useState(defaultData)
   const [image, setImage] = useState('')
