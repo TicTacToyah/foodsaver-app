@@ -52,20 +52,20 @@ const CardListItem = styled.li`
 
 const LocationIcon = styled.img`
   display: inline-block;
-  height: 20px;
-  width: 16px;
+  height: 24px;
+  width: 20px;
 `
 
 const NoseIcon = styled.img`
   display: inline-block;
-  height: 20px;
-  width: 16px;
+  height: 24px;
+  width: 20px;
 `
 
 const EyeIcon = styled.img`
   display: inline-block;
-  height: 20px;
-  width: 16px;
+  height: 24px;
+  width: 20px;
 `
 const StyledButton = styled.button`
   justify-self: end;
@@ -74,14 +74,14 @@ const StyledButton = styled.button`
   width: 20%;
 `
 const CommentIcon = styled.img`
-  height: 20px;
-  width: 16px;
+  height: 24px;
+  width: 20px;
   margin-bottom: -4px;
   padding-left: 2px;
 `
 const DeleteIcon = styled.img`
-  height: 20px;
-  width: 16px;
+  height: 24px;
+  width: 20px;
 `
 
 const StyledDeleteButton = styled.button`

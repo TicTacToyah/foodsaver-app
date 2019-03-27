@@ -41,7 +41,7 @@ const StyledNavLink = styled(NavLink)`
   border: solid white 2px;
   color: white;
 `
-const StyledHeader = styled.header`
+/*const StyledHeader = styled.header`
   height: 48px;
   display: flex;
   justify-content: center;
@@ -56,6 +56,7 @@ const StyledHeader = styled.header`
   margin-bottom: 10px;
   overflow: scroll;
 `
+*/
 
 export default function App() {
   const [cardData, setCardData] = useState(getCardsFromStorage())
@@ -112,7 +113,6 @@ export default function App() {
   return (
     <Router>
       <Grid>
-        <StyledHeader />
         <Route
           exact
           path="/"
