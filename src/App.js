@@ -17,7 +17,6 @@ import dayjs from 'dayjs'
 export default function App() {
   const Grid = styled.div`
     display: grid;
-    grid-template-rows: 48px auto 48px;
     position: absolute;
     top: 0;
     left: 0;
