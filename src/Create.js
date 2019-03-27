@@ -5,8 +5,8 @@ import { imageUpload } from './services'
 const StyledForm = styled.form`
   display: grid;
   grid-auto-rows: auto;
-  grid-gap: 20px;
-  padding: 50px 5px;
+  grid-gap: 10px;
+  padding: 54px 5px;
 `
 
 const StyledLabel = styled.label`
@@ -20,6 +20,11 @@ const StyledSelect = styled.select`
   height: 40px;
   font-size: 1rem;
   border: solid grey 1px;
+  background: transparent;
+`
+
+const StyledOption = styled.option`
+  background: rgba(201, 201, 201, 0.9);
 `
 
 const StyledInput = styled.input`
@@ -40,6 +45,8 @@ const StyledButton = styled.button`
   font-style: normal;
   font-size: 1rem;
 `
+
+const StyledImagePreview = styled.div``
 
 export default function Create({ onSubmit, upload }) {
   const defaultData = {
@@ -76,13 +83,13 @@ export default function Create({ onSubmit, upload }) {
 
   return (
     <StyledForm onSubmit={onSubmitHandler}>
-      <div>
+      <StyledImagePreview>
         {image ? (
           <img src={image} alt="" style={{ width: '100%' }} />
         ) : (
           <input type="file" name="file" onChange={fileHandler} />
         )}
-      </div>
+      </StyledImagePreview>
       <StyledLabel for="select-category">Wähle eine Kategorie aus:</StyledLabel>
       <StyledSelect
         type="text"
@@ -91,11 +98,11 @@ export default function Create({ onSubmit, upload }) {
         name="category"
         data-cy="select-one"
       >
-        <option>Wähle eine Option aus</option>
-        <option value="Gemüse">Gemüse</option>
-        <option value="Frucht">Obst</option>
-        <option value="Aufschnitt">Aufschnitt</option>
-        <option value="Trockenes">Trockenes</option>
+        <StyledOption>Wähle eine Option aus</StyledOption>
+        <StyledOption value="Gemüse">Gemüse</StyledOption>
+        <StyledOption value="Frucht">Obst</StyledOption>
+        <StyledOption value="Aufschnitt">Aufschnitt</StyledOption>
+        <StyledOption value="Trockenes">Trockenes</StyledOption>
       </StyledSelect>
       <StyledLabel for="input-title">Was möchtest du retten?</StyledLabel>
       <StyledInput
