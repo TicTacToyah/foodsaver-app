@@ -1,74 +1,73 @@
-import React, { useState, useEffect } from 'react'
-import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom'
+import dayjs from 'dayjs'
+import React, { useEffect, useState } from 'react'
+import { BrowserRouter as Router, NavLink, Route } from 'react-router-dom'
+import styled from 'styled-components'
+import uid from 'uid'
 import CardsPage from './CardsPage'
 import Create from './Create'
-import uid from 'uid'
 import {
-  getCardsFromStorage,
-  getAllCards,
-  postNewCard,
-  postComment,
   deleteStoredCard,
   deleteStoredComment,
+  getAllCards,
+  getCardsFromStorage,
+  postComment,
+  postNewCard,
 } from './services'
-import GlobalStyles from './GlobalStyles'
-import styled from 'styled-components'
-import dayjs from 'dayjs'
+
+const Grid = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+`
+const StyledNav = styled.nav`
+  display: grid;
+  grid-auto-flow: column;
+  font-family: Helvetica, sans-serif;
+  background-color: whitesmoke;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+`
+const StyledNavLink = styled(NavLink)`
+  height: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Helvetica, sans-serif;
+  text-decoration: none;
+  color: #76ca8f;
+`
+/*const StyledHeader = styled.header`
+  height: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  background-color: whitesmoke;
+  width: 100%;
+  border: solid white 2px;
+  color: white;
+  font: 1.5em Helvetica, sans-serif;
+  color: #76ca8f;
+  margin-bottom: 10px;
+  overflow: scroll;
+`
+*/
+
 export default function App() {
-  const Grid = styled.div`
-    display: grid;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  `
-
-  const StyledNav = styled.nav`
-    display: grid;
-    grid-auto-flow: column;
-    font-family: Helvetica, sans-serif;
-    background-color: rgba(187, 187, 187, 0.4);
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-  `
-  const StyledNavLink = styled(NavLink)`
-    height: 48px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: Helvetica, sans-serif;
-    text-decoration: none;
-    border: solid white 2px;
-    color: white;
-  `
-  const StyledHeader = styled.div`
-    height: 48px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-    top: 0;
-    background-color: rgba(187, 187, 187, 0.4);
-    width: 100%;
-    border: solid white 2px;
-    color: white;
-    font-family: Helvetica, sans-serif;
-    margin-bottom: 10px;
-    overflow: scroll;
-  `
-
   const [cardData, setCardData] = useState(getCardsFromStorage())
 
   useEffect(() => {
     getAllCards().then(response => {
-      setCardData([...cardData, ...response.data])
+      setCardData([...response.data])
     })
   }, [])
 
   function addCard(data) {
-    data._id = uid()
     data.comments = []
     postNewCard(data).then(response => {
       setCardData([...cardData, response.data])
@@ -79,15 +78,11 @@ export default function App() {
     const index = cardData.findIndex(item => item === card)
     commentData.date = dayjs()
     commentData._id = uid()
+    commentData.belongsToCard = card._id
     postComment(commentData, card).then(response => {
       setCardData([
         ...cardData.slice(0, index),
-        {
-          ...cardData[index],
-          ...cardData[index].comments.push({
-            ...commentData,
-          }),
-        },
+        response.data,
         ...cardData.slice(index + 1),
       ])
     })
@@ -95,9 +90,9 @@ export default function App() {
 
   function deleteCard(card) {
     const index = cardData.findIndex(item => item === card)
-    deleteStoredCard(card).then(response => {
+    deleteStoredCard(card).then(
       setCardData([...cardData.slice(0, index), ...cardData.slice(index + 1)])
-    })
+    )
   }
 
   function deleteComment(card, comment) {
@@ -105,7 +100,9 @@ export default function App() {
     const commentIndex = cardData[index].comments.findIndex(
       item => item === comment
     )
-    deleteStoredComment(comment).then(response => {
+    console.log(card)
+    deleteStoredComment(comment, card).then(response => {
+      console.log(response)
       setCardData([
         ...cardData,
         cardData[index].comments.splice(commentIndex, 1),
@@ -116,6 +113,7 @@ export default function App() {
   return (
     <Router>
       <Grid>
+        <StyledHeader>FoodSaver</StyledHeader>
         <Route
           exact
           path="/"

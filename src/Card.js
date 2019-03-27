@@ -9,10 +9,13 @@ const CardBody = styled.section`
   box-shadow: 0px 15px 18px rgba(201, 201, 201, 0.5);
   margin-bottom: 28px;
   padding: 5px;
+  border: rgba(201, 201, 201, 0.2) solid 1px;
 `
 
 const CardImage = styled.img`
   width: 100%;
+  height: 200px;
+  object-fit: cover;
 `
 
 const CardInformation = styled.section`
@@ -20,14 +23,15 @@ const CardInformation = styled.section`
 `
 const CardCategory = styled.h3`
   font-family: Helvetica;
-  font-size: 0.8em;
-  color: #9e9e9e;
+  font-size: 1em;
+  color: #858585;
 `
 
 const CardHeadline = styled.h2`
   font-family: Helvetica;
   color: #333333;
   font-style: normal;
+  font-size: 1.4em;
 `
 
 const CardList = styled.ul`
@@ -43,36 +47,48 @@ const CardListItem = styled.li`
   margin: 0 10px 10px 0;
   padding: 2px 6px;
   font-family: Helvetica, sans-serif;
-  font-size: 0.8em;
-  color: #9e9e9e;
+  color: #858585;
 `
 
 const LocationIcon = styled.img`
   display: inline-block;
-  height: 20px;
-  width: 16px;
+  height: 24px;
+  width: 20px;
 `
 
 const NoseIcon = styled.img`
   display: inline-block;
-  height: 20px;
-  width: 16px;
+  height: 24px;
+  width: 20px;
 `
 
 const EyeIcon = styled.img`
   display: inline-block;
-  height: 20px;
-  width: 16px;
+  height: 24px;
+  width: 20px;
 `
 const StyledButton = styled.button`
   justify-self: end;
+  background: transparent;
+  border: none;
   width: 20%;
 `
 const CommentIcon = styled.img`
-  height: 20px;
-  width: 16px;
+  height: 24px;
+  width: 20px;
   margin-bottom: -4px;
   padding-left: 2px;
+`
+const DeleteIcon = styled.img`
+  height: 24px;
+  width: 20px;
+`
+
+const StyledDeleteButton = styled.button`
+  justify-self: end;
+  width: 20%;
+  background: transparent;
+  border: none;
 `
 
 export default function Card({
@@ -100,7 +116,9 @@ export default function Card({
 
   return (
     <CardBody>
-      <button onClick={deleteCard}>X</button>
+      <StyledDeleteButton onClick={deleteCard}>
+        <DeleteIcon src={require('./images/round-delete-button.svg')} />
+      </StyledDeleteButton>
       <CardImage src={image} />
       <CardInformation>
         <CardCategory>{category}</CardCategory>

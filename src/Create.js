@@ -62,6 +62,7 @@ export default function Create({ onSubmit, upload }) {
     event.preventDefault()
     onSubmit(data)
     setData(defaultData)
+    setImage('')
   }
   const [data, setData] = useState(defaultData)
   const [image, setImage] = useState('')
@@ -75,7 +76,6 @@ export default function Create({ onSubmit, upload }) {
 
   async function fileHandler(event) {
     await imageUpload(event).then(response => {
-      console.log(response)
       setImage(response.data.url)
       setData({ ...data, image: response.data.url })
     })
