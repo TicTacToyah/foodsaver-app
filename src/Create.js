@@ -3,7 +3,9 @@ import styled from 'styled-components'
 import { imageUpload } from './services'
 
 const StyledSection = styled.section`
-  display: flex;
+  display: grid;
+  grid-auto-rows: auto;
+  padding: 50px 5px;
 `
 
 const StyledText = styled.p`
