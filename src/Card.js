@@ -99,6 +99,7 @@ export default function Card({
   comments,
   addComment,
   deleteCard,
+  deleteComment,
 }) {
   function countComments() {
     if (comments === undefined) {
@@ -137,6 +138,7 @@ export default function Card({
           comments={comments}
           addComment={addComment}
           card={card}
+          deleteComment={deleteComment}
         />
       )}
     </CardBody>

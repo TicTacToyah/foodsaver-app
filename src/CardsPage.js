@@ -9,7 +9,12 @@ const CardContainer = styled.section`
   padding: 0 15px 29px 15px;
 `
 
-export default function CardsPage({ cardData, addComment, deleteCard }) {
+export default function CardsPage({
+  cardData,
+  addComment,
+  deleteCard,
+  deleteComment,
+}) {
   console.log(cardData, 'Cards Page')
   return (
     <CardContainer>
@@ -17,7 +22,7 @@ export default function CardsPage({ cardData, addComment, deleteCard }) {
         <Card
           card={card}
           category={card.category}
-          image={card.imageURL}
+          image={card.image}
           title={card.title}
           location={card.location}
           smell={card.smell}
@@ -26,6 +31,7 @@ export default function CardsPage({ cardData, addComment, deleteCard }) {
           comments={card.comments}
           addComment={addComment}
           deleteCard={() => deleteCard(card)}
+          deleteComment={deleteComment}
         />
       ))}
     </CardContainer>

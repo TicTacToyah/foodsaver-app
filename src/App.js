@@ -4,11 +4,12 @@ import CardsPage from './CardsPage'
 import Create from './Create'
 import uid from 'uid'
 import {
-  saveCardsToStorage,
   getCardsFromStorage,
   getAllCards,
   postNewCard,
   postComment,
+  deleteStoredCard,
+  deleteStoredComment,
 } from './services'
 import GlobalStyles from './GlobalStyles'
 import styled from 'styled-components'
@@ -70,7 +71,6 @@ export default function App() {
   function addCard(data) {
     data._id = uid()
     data.comments = []
-    saveCardsToStorage([...cardData, data])
     postNewCard(data).then(response => {
       setCardData([...cardData, response.data])
     })
@@ -96,13 +96,27 @@ export default function App() {
 
   function deleteCard(card) {
     const index = cardData.findIndex(item => item === card)
-    setCardData([...cardData.slice(0, index), ...cardData.slice(index + 1)])
+    deleteStoredCard(card).then(response => {
+      setCardData([...cardData.slice(0, index), ...cardData.slice(index + 1)])
+    })
+  }
+
+  function deleteComment(card, comment) {
+    const index = cardData.findIndex(item => item === card)
+    const commentIndex = cardData[index].comments.findIndex(
+      item => item === comment
+    )
+    deleteStoredComment(comment).then(response => {
+      setCardData([
+        ...cardData,
+        cardData[index].comments.splice(commentIndex, 1),
+      ])
+    })
   }
 
   return (
     <Router>
       <Grid>
-        <StyledHeader>Foodsaver</StyledHeader>
         <Route
           exact
           path="/"
@@ -111,6 +125,7 @@ export default function App() {
               cardData={cardData}
               addComment={addComment}
               deleteCard={deleteCard}
+              deleteComment={deleteComment}
             />
           )}
         />
