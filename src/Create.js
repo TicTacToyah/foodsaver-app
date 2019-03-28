@@ -119,7 +119,9 @@ export default function Create({ onSubmit, upload }) {
           <StyledFileInput type="file" name="file" onChange={fileHandler} />
         )}
       </div>
-      <StyledLabel for="select-category">Wähle eine Kategorie aus:</StyledLabel>
+      <StyledLabel htmlFor="select-category">
+        Wähle eine Kategorie aus:
+      </StyledLabel>
       <StyledSelect
         type="text"
         onChange={onInputChange}
@@ -133,7 +135,7 @@ export default function Create({ onSubmit, upload }) {
         <StyledOption value="Aufschnitt">Aufschnitt</StyledOption>
         <StyledOption value="Trockenes">Trockenes</StyledOption>
       </StyledSelect>
-      <StyledLabel for="input-title">Was möchtest du retten?</StyledLabel>
+      <StyledLabel htmlFor="input-title">Was möchtest du retten?</StyledLabel>
       <StyledInput
         type="text"
         name="title"
@@ -141,7 +143,7 @@ export default function Create({ onSubmit, upload }) {
         onChange={onInputChange}
         data-cy="input-one"
       />
-      <StyledLabel for="select-smell">Wie riecht&apos;s?</StyledLabel>
+      <StyledLabel htmlFor="select-smell">Wie riecht&apos;s?</StyledLabel>
       <StyledSelect
         type="text"
         name="smell"
@@ -155,7 +157,7 @@ export default function Create({ onSubmit, upload }) {
         <option value="Okay">Okay</option>
         <option value="Schlecht">Ab auf den Komposthaufen</option>
       </StyledSelect>
-      <StyledLabel for="select-optic">Wie sieht&apos;s aus?</StyledLabel>
+      <StyledLabel htmlFor="select-optic">Wie sieht&apos;s aus?</StyledLabel>
       <StyledSelect
         type="text"
         name="optic"
@@ -168,7 +170,9 @@ export default function Create({ onSubmit, upload }) {
         <option value="Ganz gut">Ganz gut</option>
         <option value="Bio-Tonne">Bio-Tonne</option>
       </StyledSelect>
-      <StyledLabel for="input-location">Wo kann man es abholen?</StyledLabel>
+      <StyledLabel htmlFor="input-location">
+        Wo kann man es abholen?
+      </StyledLabel>
       <StyledInput
         type="text"
         name="location"
