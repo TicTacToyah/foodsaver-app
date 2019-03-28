@@ -45,7 +45,6 @@ export default function Comment({ addComment, card }) {
   }
   function submitHandler(event) {
     event.preventDefault()
-    console.log(addComment)
     addComment(commentData, card)
     setCommentData(defaultComment)
   }

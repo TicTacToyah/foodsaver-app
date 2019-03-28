@@ -6,47 +6,76 @@ const StyledForm = styled.form`
   display: grid;
   grid-auto-rows: auto;
   grid-gap: 10px;
-  padding: 54px 5px;
+  padding: 54px 15px;
 `
 
 const StyledLabel = styled.label`
   font-family: Helvetica;
   color: #333333;
-  font-style: normal;
+  font-size: 1rem;
+  font-style: bold;
 `
 
 const StyledSelect = styled.select`
   width: 100%;
-  height: 40px;
+  height: 30px;
   font-size: 1rem;
-  border: solid grey 1px;
+  border: rgba(201, 201, 201, 0.9) solid 1px;
   background: transparent;
+  margin-bottom: 20px;
 `
 
 const StyledOption = styled.option`
+  font-size: 1rem;
   background: rgba(201, 201, 201, 0.9);
 `
 
 const StyledInput = styled.input`
   width: 100%;
-  height: 40px;
+  height: 30px;
   background: transparent;
   border: none;
-  border-bottom: solid grey 1px;
-  margin-bottom: 10px;
+  border-bottom: rgba(201, 201, 201, 0.9) solid 1px;
+  margin-bottom: 20px;
 `
 
 const StyledButton = styled.button`
-  margin: 5px auto 0;
-  height: 40px;
-  border: solid grey 1px;
-  font-family: Helvetica;
+  width: 50%;
+  justify-self: center;
+  font-size: 1em;
+  background: #76ca8f;
+  border: none;
+  border-radius: 5px;
   color: #333333;
-  font-style: normal;
-  font-size: 1rem;
+  font-style: bold;
+  padding: 2px;
+  margin: 4px;
 `
 
-const StyledImagePreview = styled.div``
+const StyledImagePreview = styled.div`
+  width: 50%;
+  justify-self: center;
+  font-size: 1em;
+  background: #76ca8f;
+  border: none;
+  border-radius: 5px;
+  color: #333333;
+  font-style: bold;
+  padding: 2px;
+  margin: 4px;
+`
+
+const StyledFileInput = styled.input`
+  justify-self: center;
+  font-size: 1em;
+  background: #76ca8f;
+  border: none;
+  border-radius: 5px;
+  color: #333333;
+  font-style: bold;
+  padding: 2px;
+  margin: 4px;
+`
 
 export default function Create({ onSubmit, upload }) {
   const defaultData = {
@@ -83,13 +112,13 @@ export default function Create({ onSubmit, upload }) {
 
   return (
     <StyledForm onSubmit={onSubmitHandler}>
-      <StyledImagePreview>
+      <div>
         {image ? (
           <img src={image} alt="" style={{ width: '100%' }} />
         ) : (
-          <input type="file" name="file" onChange={fileHandler} />
+          <StyledFileInput type="file" name="file" onChange={fileHandler} />
         )}
-      </StyledImagePreview>
+      </div>
       <StyledLabel for="select-category">Wähle eine Kategorie aus:</StyledLabel>
       <StyledSelect
         type="text"
@@ -98,7 +127,7 @@ export default function Create({ onSubmit, upload }) {
         name="category"
         data-cy="select-one"
       >
-        <StyledOption>Wähle eine Option aus</StyledOption>
+        <StyledOption>Wähle eine Option aus:</StyledOption>
         <StyledOption value="Gemüse">Gemüse</StyledOption>
         <StyledOption value="Frucht">Obst</StyledOption>
         <StyledOption value="Aufschnitt">Aufschnitt</StyledOption>
@@ -120,8 +149,8 @@ export default function Create({ onSubmit, upload }) {
         onChange={onInputChange}
         data-cy="select-two"
       >
-        <option>Wähle eine Option aus</option>
-        <option value="Einfach lecker!">Einfach lecker!</option>
+        <option>Wähle eine Option aus:</option>
+        <option value="Super!">Super!</option>
         <option value="Gut">Gut</option>
         <option value="Okay">Okay</option>
         <option value="Schlecht">Ab auf den Komposthaufen</option>
@@ -134,9 +163,9 @@ export default function Create({ onSubmit, upload }) {
         onChange={onInputChange}
         data-cy="select-three"
       >
-        <option>Wähle eine Option aus</option>
+        <option>Wähle eine Option aus:</option>
         <option value="Top">Top</option>
-        <option value="Noch ganz gut">Noch ganz gut</option>
+        <option value="Ganz gut">Ganz gut</option>
         <option value="Bio-Tonne">Bio-Tonne</option>
       </StyledSelect>
       <StyledLabel for="input-location">Wo kann man es abholen?</StyledLabel>
