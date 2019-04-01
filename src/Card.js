@@ -116,7 +116,7 @@ export default function Card({
 
   return (
     <CardBody>
-      <StyledDeleteButton onClick={deleteCard}>
+      <StyledDeleteButton onClick={() => deleteCard(card)}>
         <DeleteIcon src={require('./images/round-delete-button.svg')} />
       </StyledDeleteButton>
       <CardImage src={image} />

@@ -15,7 +15,6 @@ export default function CardsPage({
   deleteCard,
   deleteComment,
 }) {
-  console.log(cardData, 'Cards Page')
   return (
     <CardContainer>
       {cardData.map(card => (
@@ -30,7 +29,7 @@ export default function CardsPage({
           key={card._id}
           comments={card.comments}
           addComment={addComment}
-          deleteCard={() => deleteCard(card)}
+          deleteCard={deleteCard}
           deleteComment={deleteComment}
         />
       ))}

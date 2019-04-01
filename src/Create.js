@@ -52,19 +52,6 @@ const StyledButton = styled.button`
   margin: 4px;
 `
 
-const StyledImagePreview = styled.div`
-  width: 50%;
-  justify-self: center;
-  font-size: 1em;
-  background: #76ca8f;
-  border: none;
-  border-radius: 5px;
-  color: #333333;
-  font-style: bold;
-  padding: 2px;
-  margin: 4px;
-`
-
 const StyledFileInput = styled.input`
   justify-self: center;
   font-size: 1em;

@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import uid from 'uid'
 import CardsPage from './CardsPage'
 import Create from './Create'
+import Filter from './Filter'
 import {
   deleteStoredCard,
   deleteStoredComment,
@@ -47,6 +48,7 @@ const StyledHeader = styled.header`
   align-items: center;
   position: fixed;
   top: 0;
+  z-index: 3;
   background-color: whitesmoke;
   width: 100%;
   border: solid white 2px;
@@ -58,7 +60,7 @@ const StyledHeader = styled.header`
 `
 
 export default function App() {
-  const [cardData, setCardData] = useState(getCardsFromStorage())
+  const [cardData, setCardData] = useState([])
 
   useEffect(() => {
     getAllCards().then(response => {
@@ -88,25 +90,27 @@ export default function App() {
   }
 
   function deleteCard(card) {
-    const index = cardData.findIndex(item => item === card)
-    deleteStoredCard(card).then(
-      setCardData([...cardData.slice(0, index), ...cardData.slice(index + 1)])
-    )
+    if (window.confirm('Willst du die Karte wirklich löschen?')) {
+      const index = cardData.findIndex(item => item === card)
+      deleteStoredCard(card).then(
+        setCardData([...cardData.slice(0, index), ...cardData.slice(index + 1)])
+      )
+    }
   }
 
   function deleteComment(card, comment) {
-    const index = cardData.findIndex(item => item === card)
-    const commentIndex = cardData[index].comments.findIndex(
-      item => item === comment
-    )
-    console.log(card)
-    deleteStoredComment(comment, card).then(response => {
-      console.log(response)
-      setCardData([
-        ...cardData,
-        cardData[index].comments.splice(commentIndex, 1),
-      ])
-    })
+    if (window.confirm('Willst den Kommentar wirklich löschen?')) {
+      const index = cardData.findIndex(item => item === card)
+      const commentIndex = cardData[index].comments.findIndex(
+        item => item === comment
+      )
+      deleteStoredComment(comment, card).then(response => {
+        setCardData([
+          ...cardData,
+          cardData[index].comments.splice(commentIndex, 1),
+        ])
+      })
+    }
   }
 
   return (
@@ -126,9 +130,21 @@ export default function App() {
           )}
         />
         <Route path="/create" render={() => <Create onSubmit={addCard} />} />
+        <Route
+          path="/filter"
+          render={() => (
+            <Filter
+              cardData={cardData}
+              addComment={addComment}
+              deleteCard={deleteCard}
+              deleteComment={deleteComment}
+            />
+          )}
+        />
         <StyledNav>
           <StyledNavLink to="/">Home</StyledNavLink>
           <StyledNavLink to="/create">Create</StyledNavLink>
+          <StyledNavLink to="/filter">Filter</StyledNavLink>
         </StyledNav>
       </Grid>
     </Router>
