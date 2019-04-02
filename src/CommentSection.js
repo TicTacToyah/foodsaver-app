@@ -31,6 +31,7 @@ const StyledName = styled.h4`
 `
 const StyledParagraph = styled.p`
   margin: 2px 4px;
+  overflow-wrap: break-word;
 `
 const StyledButton = styled.button`
   color: #858585;
