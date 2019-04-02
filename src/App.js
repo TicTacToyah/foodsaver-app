@@ -125,7 +125,12 @@ export default function App() {
             />
           )}
         />
-        <Route path="/create" render={() => <Create onSubmit={addCard} />} />
+        <Route
+          path="/create"
+          render={({ history }) => (
+            <Create onSubmit={addCard} history={history} />
+          )}
+        />
         <StyledNav>
           <StyledNavLink to="/">Home</StyledNavLink>
           <StyledNavLink to="/create">Create</StyledNavLink>

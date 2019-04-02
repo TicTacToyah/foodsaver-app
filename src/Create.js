@@ -77,7 +77,7 @@ const StyledFileInput = styled.input`
   margin: 4px;
 `
 
-export default function Create({ onSubmit, upload }) {
+export default function Create({ onSubmit, history }) {
   const defaultData = {
     image: '',
     title: '',
@@ -89,12 +89,15 @@ export default function Create({ onSubmit, upload }) {
 
   function onSubmitHandler(event) {
     event.preventDefault()
-    onSubmit(data)
+    !Object.values(data).includes('') && onSubmit(data)
     setData(defaultData)
     setImage('')
+    history.push('/')
   }
+
   const [data, setData] = useState(defaultData)
   const [image, setImage] = useState('')
+  console.log(data)
 
   function onInputChange(event) {
     setData({
@@ -104,10 +107,9 @@ export default function Create({ onSubmit, upload }) {
   }
 
   async function fileHandler(event) {
-    await imageUpload(event).then(response => {
-      setImage(response.data.url)
-      setData({ ...data, image: response.data.url })
-    })
+    const response = await imageUpload(event)
+    setImage(response.data.url)
+    setData({ ...data, image: response.data.url })
   }
 
   return (
@@ -116,7 +118,12 @@ export default function Create({ onSubmit, upload }) {
         {image ? (
           <img src={image} alt="" style={{ width: '100%' }} />
         ) : (
-          <StyledFileInput type="file" name="file" onChange={fileHandler} />
+          <StyledFileInput
+            type="file"
+            name="file"
+            onChange={fileHandler}
+            required
+          />
         )}
       </div>
       <StyledLabel htmlFor="select-category">
@@ -128,8 +135,9 @@ export default function Create({ onSubmit, upload }) {
         value={data.category}
         name="category"
         data-cy="select-one"
+        required
       >
-        <StyledOption>Wähle eine Option aus:</StyledOption>
+        <StyledOption value="">Wähle eine Option aus:</StyledOption>
         <StyledOption value="Gemüse">Gemüse</StyledOption>
         <StyledOption value="Frucht">Obst</StyledOption>
         <StyledOption value="Aufschnitt">Aufschnitt</StyledOption>
@@ -142,6 +150,7 @@ export default function Create({ onSubmit, upload }) {
         value={data.title}
         onChange={onInputChange}
         data-cy="input-one"
+        required
       />
       <StyledLabel htmlFor="select-smell">Wie riecht&apos;s?</StyledLabel>
       <StyledSelect
@@ -150,8 +159,9 @@ export default function Create({ onSubmit, upload }) {
         value={data.smell}
         onChange={onInputChange}
         data-cy="select-two"
+        required
       >
-        <option>Wähle eine Option aus:</option>
+        <option value="">Wähle eine Option aus:</option>
         <option value="Super!">Super!</option>
         <option value="Gut">Gut</option>
         <option value="Okay">Okay</option>
@@ -164,8 +174,9 @@ export default function Create({ onSubmit, upload }) {
         value={data.optic}
         onChange={onInputChange}
         data-cy="select-three"
+        required
       >
-        <option>Wähle eine Option aus:</option>
+        <option value="">Wähle eine Option aus:</option>
         <option value="Top">Top</option>
         <option value="Ganz gut">Ganz gut</option>
         <option value="Bio-Tonne">Bio-Tonne</option>
@@ -179,6 +190,7 @@ export default function Create({ onSubmit, upload }) {
         value={data.location}
         onChange={onInputChange}
         data-cy="input-two"
+        required
       />
       <StyledButton>Save me</StyledButton>
     </StyledForm>
