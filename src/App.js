@@ -10,7 +10,6 @@ import {
   deleteStoredCard,
   deleteStoredComment,
   getAllCards,
-  getCardsFromStorage,
   postComment,
   postNewCard,
 } from './services'
