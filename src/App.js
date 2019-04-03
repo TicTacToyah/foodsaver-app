@@ -1,4 +1,3 @@
-import dayjs from 'dayjs'
 import React, { useEffect, useState } from 'react'
 import { BrowserRouter as Router, NavLink, Route } from 'react-router-dom'
 import styled from 'styled-components'
@@ -13,8 +12,10 @@ import {
   postComment,
   postNewCard,
 } from './services'
+import dayjs from 'dayjs'
 
 const Grid = styled.div`
+  display: grid;
   position: absolute;
   top: 0;
   left: 0;
