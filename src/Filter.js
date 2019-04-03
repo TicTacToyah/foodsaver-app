@@ -3,15 +3,10 @@ import styled from 'styled-components'
 import CardsPage from './CardsPage'
 
 const StyledForm = styled.form`
-  display: grid;
-  grid-auto-rows: auto;
   width: 100%;
-  grid-gap: 10px;
-  padding: 54px 15px;
-  padding-bottom: 0;
+  padding: 54px 15px 10px;
   position: fixed;
   background: white;
-  margin-bottom: 90px;
   justify-content: center;
 `
 const StyledLabel = styled.label`
@@ -21,6 +16,10 @@ const StyledLabel = styled.label`
   font-style: bold;
   width: 100%;
   text-align: center;
+  font-size: 1.4em;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: inline-block;
 `
 
 const StyledSelect = styled.select`
