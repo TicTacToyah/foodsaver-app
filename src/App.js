@@ -52,10 +52,9 @@ const StyledHeader = styled.header`
   z-index: 3;
   background-color: whitesmoke;
   width: 100%;
-  border: solid white 2px;
-  color: white;
-  font: 1.5em Helvetica, sans-serif;
-  color: #76ca8f;
+  font: 2em Monsserat, sans-serif;
+  letter-spacing: 2px;
+  color: #333333;
   margin-bottom: 10px;
   overflow: scroll;
 `
@@ -79,6 +78,10 @@ const AddIcon = styled.img`
 `
 const NavIcon = styled.img`
   height: 28px;
+  width: auto;
+`
+const HeaderLogo = styled.img`
+  height: 30px;
   width: auto;
 `
 
@@ -139,7 +142,10 @@ export default function App() {
   return (
     <Router>
       <Grid>
-        <StyledHeader>FoodSaver</StyledHeader>
+        <StyledHeader>
+          <HeaderLogo src={require('./images/Group.svg')} alt="" />
+          FoodSaver
+        </StyledHeader>
         <Route
           exact
           path="/"
