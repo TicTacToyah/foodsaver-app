@@ -134,7 +134,7 @@ export default function Card({
       </CardInformation>
       <StyledButton onClick={() => setIsHidden(!isHidden)}>
         {countComments()}
-        <CommentIcon src={require('./images/comment.svg')} alt="" />
+        <CommentIcon src={require('./images/comment.svg')} alt="CommentIcon" />
       </StyledButton>
       {isHidden && (
         <CommentSection

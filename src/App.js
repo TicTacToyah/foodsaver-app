@@ -29,12 +29,13 @@ const StyledNav = styled.nav`
   font-family: Helvetica, sans-serif;
   background-color: whitesmoke;
   position: fixed;
-  bottom: 0;
+  bottom: 0px;
   width: 100%;
 `
 const StyledNavLink = styled(NavLink)`
   height: 48px;
   display: flex;
+  position: relative;
   justify-content: center;
   align-items: center;
   font-family: Helvetica, sans-serif;
@@ -57,6 +58,28 @@ const StyledHeader = styled.header`
   color: #76ca8f;
   margin-bottom: 10px;
   overflow: scroll;
+`
+const AddIconBg = styled.div`
+  height: 60px;
+  width: 80px;
+  position: absolute;
+  background-color: whitesmoke;
+  border-radius: 50%;
+  z-index: 5;
+  bottom: 1px;
+`
+
+const AddIcon = styled.img`
+  height: 50px;
+  width: auto;
+  z-index: 2;
+  position: absolute;
+  bottom: 1px;
+  left: 15px;
+`
+const NavIcon = styled.img`
+  height: 28px;
+  width: auto;
 `
 
 export default function App() {
@@ -147,9 +170,17 @@ export default function App() {
           )}
         />
         <StyledNav>
-          <StyledNavLink to="/">Home</StyledNavLink>
-          <StyledNavLink to="/create">Create</StyledNavLink>
-          <StyledNavLink to="/filter">Filter</StyledNavLink>
+          <StyledNavLink to="/">
+            <NavIcon src={require('./images/home.svg')} />
+          </StyledNavLink>
+          <StyledNavLink to="/create">
+            <AddIconBg>
+              <AddIcon src={require('./images/plus (5).svg')} />
+            </AddIconBg>
+          </StyledNavLink>
+          <StyledNavLink to="/filter">
+            <NavIcon src={require('./images/filter.svg')} />
+          </StyledNavLink>
         </StyledNav>
       </Grid>
     </Router>

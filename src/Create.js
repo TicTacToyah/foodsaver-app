@@ -50,7 +50,7 @@ const StyledButton = styled.button`
   color: #333333;
   font-style: bold;
   padding: 2px;
-  margin: 4px;
+  margin: 4px 4px 10px;
 `
 
 const StyledFileInput = styled.input`
